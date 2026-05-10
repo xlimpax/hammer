@@ -17,8 +17,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "glass shadow-2xl py-4" : "bg-transparent py-6"
+      className={`sticky top-10 z-50 transition-all duration-500 ${
+        isScrolled ? "glass shadow-2xl py-4" : "bg-[var(--color-brand-dark)] py-6"
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -31,11 +31,11 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8">
-          {["Home", "Shop", "Collections", "About", "Contact"].map((item) => (
-            <Link key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors">
-              {item}
-            </Link>
-          ))}
+          <Link href="/" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors">Home</Link>
+          <Link href="/#shop" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors">Shop</Link>
+          <Link href="/#collections" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors">Collections</Link>
+          <Link href="/#about" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors">About</Link>
+          <Link href="/contact" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-orange)]">Contact</Link>
         </nav>
 
         {/* Icons */}
@@ -72,11 +72,11 @@ export default function Navbar() {
             className="md:hidden absolute top-full left-0 right-0 glass border-t border-white/10 overflow-hidden"
           >
             <div className="flex flex-col gap-6 p-6">
-              {["Home", "Shop", "Collections", "About", "Contact"].map((item) => (
-                <Link key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">
-                  {item}
-                </Link>
-              ))}
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Home</Link>
+              <Link href="/#shop" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Shop</Link>
+              <Link href="/#collections" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Collections</Link>
+              <Link href="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">About</Link>
+              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-orange)] transition-colors">Contact</Link>
               <div className="flex items-center gap-6 pt-6 border-t border-white/10">
                 <Search size={24} className="hover:text-[var(--color-brand-orange)]" />
                 <Heart size={24} className="hover:text-[var(--color-brand-orange)]" />

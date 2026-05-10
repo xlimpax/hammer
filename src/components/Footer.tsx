@@ -67,15 +67,22 @@ export default function Footer() {
             <ul className="flex flex-col gap-4 text-sm text-gray-400">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-[var(--color-brand-orange)] shrink-0 mt-0.5" />
-                <span>123 Fashion Street, NY 10001, United States</span>
+                <a 
+                  href="https://share.google/kymZSKfMG8Y5lQ6Qb" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--color-brand-orange)] transition-colors"
+                >
+                  Ashutosh Colony, Vivekananda Park, Sreenagar, Habra, West Bengal 743271
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-[var(--color-brand-orange)] shrink-0" />
-                <span>+1 (800) 123-4567</span>
+                <span>+91 9903747606</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-[var(--color-brand-orange)] shrink-0" />
-                <span>support@hammerbags.com</span>
+                <span>xlimpax@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -87,6 +94,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} HAMMER. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-gray-500">
+            <Link href="/admin/login" className="hover:text-[var(--color-brand-orange)] transition-colors">Admin Login</Link>
             <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>

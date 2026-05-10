@@ -1,19 +1,39 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useMessageStore } from "@/store/useMessageStore";
 
 export default function HeroSection() {
+  const { heroBadge } = useMessageStore();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section id="home" className="relative w-full min-h-screen flex items-center overflow-hidden bg-[var(--color-brand-dark)]">
       {/* Background Gradient & Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-brand-dark)] via-[var(--color-brand-dark)] to-[#1a0e0a]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-brand-orange)]/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between relative z-10 pt-20">
+      <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between relative z-10 pt-10">
         
         {/* Left Content */}
         <div className="w-full md:w-1/2 flex flex-col gap-6 text-center md:text-left mt-12 md:mt-0">
+          {isMounted && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 bg-[var(--color-brand-orange)]/10 border border-[var(--color-brand-orange)]/20 text-[var(--color-brand-orange)] px-4 py-2 rounded-full w-fit mx-auto md:mx-0 font-bold text-xs uppercase tracking-widest"
+            >
+              <span className="w-2 h-2 rounded-full bg-[var(--color-brand-orange)] animate-pulse" />
+              {heroBadge}
+            </motion.div>
+          )}
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

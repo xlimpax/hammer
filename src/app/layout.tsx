@@ -3,6 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ClientLayout from "@/components/ClientLayout";
+import CurrencyInitializer from "@/components/CurrencyInitializer";
+import AnnouncementBar from "@/components/AnnouncementBar";
+import TrendingBar from "@/components/TrendingBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,16 +23,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} antialiased bg-[var(--color-brand-dark)] text-white relative`}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <CurrencyInitializer />
+        <AnnouncementBar />
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+        <TrendingBar />
         
         {/* Floating WhatsApp Button */}
         <a 
-          href="https://wa.me/1234567890" 
+          href="https://wa.me/919903747606" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:scale-110 transition-transform duration-300"
+          className="fixed bottom-20 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:scale-110 transition-transform duration-300"
           aria-label="Chat on WhatsApp"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
