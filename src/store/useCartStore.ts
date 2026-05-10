@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface CartItem {
-  id: number;
+  id: string;
   name: string;
   price: number;
   quantity: number;
@@ -11,9 +11,11 @@ export interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
   addItem: (item: CartItem) => void;
-  removeItem: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  removeItem: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
   totalItems: () => number;
   totalPrice: () => number;
@@ -23,6 +25,8 @@ export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
+      isOpen: false,
+      setIsOpen: (open) => set({ isOpen: open }),
       addItem: (newItem) => {
         const currentItems = get().items;
         const existingItem = currentItems.find(item => item.id === newItem.id);
@@ -51,6 +55,7 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'hammer-cart',
+      partialize: (state) => ({ items: state.items }), // Only persist items, not isOpen
     }
   )
 );

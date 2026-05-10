@@ -11,7 +11,7 @@ import { MessageSquare } from "lucide-react";
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const { products, addProduct, updateProduct, deleteProduct } = useProductStore();
+  const { products, addProduct, updateProduct, deleteProduct, retailShippingCharge, updateShippingCharge, upiId, activePaymentModes, updatePaymentSettings } = useProductStore();
   const { announcements, trending, heroBadge, updateAnnouncements, updateTrending, updateHeroBadge } = useMessageStore();
   
   const [activeTab, setActiveTab] = useState("products");
@@ -40,6 +40,9 @@ export default function AdminDashboard() {
   const [localAnnouncements, setLocalAnnouncements] = useState<string[]>([]);
   const [localTrending, setLocalTrending] = useState<string[]>([]);
   const [localHeroBadge, setLocalHeroBadge] = useState("");
+  const [localShippingCharge, setLocalShippingCharge] = useState(0);
+  const [localUpiId, setLocalUpiId] = useState("");
+  const [localPaymentModes, setLocalPaymentModes] = useState({ whatsapp: true, upi: true, cards: true });
 
   useEffect(() => {
     setIsMounted(true);
@@ -49,7 +52,10 @@ export default function AdminDashboard() {
     setLocalAnnouncements(announcements);
     setLocalTrending(trending);
     setLocalHeroBadge(heroBadge);
-  }, [announcements, trending, heroBadge]);
+    setLocalShippingCharge(retailShippingCharge);
+    setLocalUpiId(upiId);
+    setLocalPaymentModes(activePaymentModes);
+  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes]);
 
   if (!isMounted) return null;
 
@@ -62,7 +68,9 @@ export default function AdminDashboard() {
     updateAnnouncements(localAnnouncements);
     updateTrending(localTrending);
     updateHeroBadge(localHeroBadge);
-    alert("All messages updated successfully!");
+    updateShippingCharge(localShippingCharge);
+    updatePaymentSettings(localPaymentModes, localUpiId);
+    alert("All settings updated successfully!");
   };
 
   const handleDelete = (id: number) => {
@@ -174,7 +182,8 @@ export default function AdminDashboard() {
       products,
       announcements,
       trending,
-      heroBadge
+      heroBadge,
+      retailShippingCharge
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -198,6 +207,7 @@ export default function AdminDashboard() {
             updateAnnouncements(data.announcements || []);
             updateTrending(data.trending || []);
             updateHeroBadge(data.heroBadge || "");
+            if (data.retailShippingCharge !== undefined) updateShippingCharge(data.retailShippingCharge);
             alert("Data imported successfully!");
             window.location.reload();
           }
@@ -418,13 +428,77 @@ export default function AdminDashboard() {
                   onChange={(e) => setLocalHeroBadge(e.target.value)}
                   className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white"
                 />
+              </div>              {/* Retail Shipping Charge */}
+              <div className="glass p-8 rounded-3xl border border-white/10">
+                <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
+                  Retail Shipping Charge (₹)
+                </h2>
+                <p className="text-gray-500 text-sm mb-4">Set the shipping fee for all retail orders (1 unit). Bulk orders remain FREE shipping.</p>
+                <input 
+                  type="number"
+                  value={localShippingCharge}
+                  onChange={(e) => setLocalShippingCharge(Number(e.target.value))}
+                  className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white font-bold text-xl"
+                />
+              </div>
+
+              {/* Payment Settings */}
+              <div className="glass p-8 rounded-3xl border border-white/10">
+                <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
+                  Payment Gateway Settings
+                </h2>
+                
+                <div className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm font-medium text-gray-400">Merchant UPI ID</label>
+                    <input 
+                      type="text"
+                      value={localUpiId}
+                      onChange={(e) => setLocalUpiId(e.target.value)}
+                      className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white font-bold"
+                      placeholder="e.g. yourname@upi"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="flex flex-col gap-3">
+                      <label className="text-[10px] font-bold uppercase text-gray-500 tracking-widest text-center">WhatsApp Mode</label>
+                      <button 
+                        onClick={() => setLocalPaymentModes({...localPaymentModes, whatsapp: !localPaymentModes.whatsapp})}
+                        className={`py-4 rounded-2xl font-bold transition-all text-xs uppercase ${localPaymentModes.whatsapp ? "bg-green-500/10 text-green-500 border border-green-500/20 shadow-lg shadow-green-500/10" : "bg-white/5 text-gray-500 border border-white/10"}`}
+                      >
+                        {localPaymentModes.whatsapp ? "ACTIVE" : "INACTIVE"}
+                      </button>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <label className="text-[10px] font-bold uppercase text-gray-500 tracking-widest text-center">UPI QR Mode</label>
+                      <button 
+                        onClick={() => setLocalPaymentModes({...localPaymentModes, upi: !localPaymentModes.upi})}
+                        className={`py-4 rounded-2xl font-bold transition-all text-xs uppercase ${localPaymentModes.upi ? "bg-[var(--color-brand-orange)]/10 text-[var(--color-brand-orange)] border border-[var(--color-brand-orange)]/20 shadow-lg shadow-orange-500/10" : "bg-white/5 text-gray-500 border border-white/10"}`}
+                      >
+                        {localPaymentModes.upi ? "ACTIVE" : "INACTIVE"}
+                      </button>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <label className="text-[10px] font-bold uppercase text-gray-500 tracking-widest text-center">Card Mode</label>
+                      <button 
+                        onClick={() => setLocalPaymentModes({...localPaymentModes, cards: !localPaymentModes.cards})}
+                        className={`py-4 rounded-2xl font-bold transition-all text-xs uppercase ${localPaymentModes.cards ? "bg-blue-500/10 text-blue-500 border border-blue-500/20 shadow-lg shadow-blue-500/10" : "bg-white/5 text-gray-500 border border-white/10"}`}
+                      >
+                        {localPaymentModes.cards ? "ACTIVE" : "INACTIVE"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <button 
                 onClick={handleSaveMessages}
                 className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
               >
-                Save All Changes
+                Save All Settings
               </button>
             </div>
           </div>

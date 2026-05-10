@@ -22,9 +22,19 @@ export interface Product {
 
 interface ProductState {
   products: Product[];
+  retailShippingCharge: number;
+  upiId: string;
+  activePaymentModes: {
+    whatsapp: boolean;
+    upi: boolean;
+    cards: boolean;
+  };
   addProduct: (product: Omit<Product, 'id' | 'rating'>) => void;
   updateProduct: (product: Product) => void;
   deleteProduct: (id: number) => void;
+  deductStock: (id: number, quantity: number) => void;
+  updateShippingCharge: (charge: number) => void;
+  updatePaymentSettings: (settings: Partial<ProductState['activePaymentModes']>, upiId?: string) => void;
 }
 
 const INITIAL_PRODUCTS: Product[] = [
@@ -62,6 +72,13 @@ export const useProductStore = create<ProductState>()(
   persist(
     (set) => ({
       products: INITIAL_PRODUCTS,
+      retailShippingCharge: 49,
+      upiId: "9903747606@ybl",
+      activePaymentModes: {
+        whatsapp: true,
+        upi: true,
+        cards: true,
+      },
       
       addProduct: (newProduct) => set((state) => ({
         products: [...state.products, { ...newProduct, id: Date.now(), rating: 5.0 }]
@@ -73,6 +90,21 @@ export const useProductStore = create<ProductState>()(
 
       deleteProduct: (id) => set((state) => ({
         products: state.products.filter(p => p.id !== id)
+      })),
+      
+      deductStock: (id, quantity) => set((state) => ({
+        products: state.products.map(p => 
+          p.id === id 
+            ? { ...p, stockQuantity: Math.max(0, p.stockQuantity - quantity), inStock: p.stockQuantity - quantity > 0 } 
+            : p
+        )
+      })),
+
+      updateShippingCharge: (charge) => set({ retailShippingCharge: charge }),
+
+      updatePaymentSettings: (settings, upiId) => set((state) => ({
+        activePaymentModes: { ...state.activePaymentModes, ...settings },
+        ...(upiId ? { upiId } : {})
       })),
     }),
     {

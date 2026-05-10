@@ -16,7 +16,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
   const [showZoom, setShowZoom] = useState(false);
   const [mode, setMode] = useState<"retail" | "wholesale" | "customization">("retail");
   const [modalQty, setModalQty] = useState(1);
-  const { addItem } = useCartStore();
+  const { addItem, setIsOpen } = useCartStore();
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,13 +36,14 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
 
   const handleAddToCart = () => {
     addItem({
-      id: product.id,
+      id: `${product.id}-${mode}`,
       name: `${product.name} (${mode.toUpperCase()})`,
       price: activePrice,
       quantity: modalQty,
       image: product.images[0]
     });
-    alert(`${product.name} (${mode}) added to cart!`);
+    setIsOpen(true);
+    onClose();
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -228,11 +229,19 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
 
             <div className="pt-8 flex flex-col gap-4">
               <button 
-                onClick={handleAddToCart}
+                onClick={() => {
+                  handleAddToCart();
+                  // Scroll down to the next action
+                  const container = document.querySelector('.custom-scrollbar');
+                  if (container) {
+                    container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+                  }
+                }}
                 disabled={product.stockQuantity === 0}
-                className="w-full bg-[var(--color-brand-orange)] text-white py-5 rounded-2xl font-bold text-xl hover:bg-orange-600 transition-all shadow-2xl shadow-orange-500/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                className="w-full bg-[var(--color-brand-orange)] text-white py-5 rounded-2xl font-bold text-xl transition-all shadow-2xl shadow-orange-500/20 flex items-center justify-center gap-3 disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98] active:translate-y-1 hover:shadow-orange-500/40 hover:animate-pulse group relative overflow-hidden cursor-pointer"
               >
-                <ShoppingCart size={24} /> Add To Cart
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+                <ShoppingCart size={24} className="group-hover:rotate-12 transition-transform" /> Add To Cart
               </button>
               <button 
                 onClick={handleOrder}
@@ -251,18 +260,18 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
 function ProductCard({ product, index, symbol, rate, onSelect }: { product: any, index: number, symbol: string, rate: number, onSelect: () => void }) {
   const [quantity, setQuantity] = useState<number | string>(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { addItem } = useCartStore();
+  const { addItem, setIsOpen } = useCartStore();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addItem({
-      id: product.id,
+      id: `${product.id}-retail`,
       name: product.name,
       price: product.price,
       quantity: Number(quantity) || 1,
       image: product.images[0]
     });
-    alert(`${product.name} added to cart!`);
+    setIsOpen(true);
   };
 
   const handleOrder = (e: React.MouseEvent) => {
