@@ -26,11 +26,18 @@ export default function HeroSection() {
           {isMounted && (
             <motion.div
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-[var(--color-brand-orange)]/10 border border-[var(--color-brand-orange)]/20 text-[var(--color-brand-orange)] px-4 py-2 rounded-full w-fit mx-auto md:mx-0 font-bold text-xs uppercase tracking-widest"
+              animate={{ 
+                opacity: 1, 
+                x: 0,
+                backgroundColor: ["rgba(255, 87, 34, 0.1)", "rgba(255, 87, 34, 0.4)", "rgba(255, 87, 34, 0.1)"],
+              }}
+              transition={{ 
+                duration: 2, 
+                backgroundColor: { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
+              }}
+              className="inline-flex items-center gap-2 border border-[var(--color-brand-orange)]/30 text-white px-5 py-2.5 rounded-full w-fit mx-auto md:mx-0 font-black text-[10px] uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(255,87,34,0.1)]"
             >
-              <span className="w-2 h-2 rounded-full bg-[var(--color-brand-orange)] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[var(--color-brand-orange)] shadow-[0_0_10px_var(--color-brand-orange)] animate-ping" />
               {heroBadge}
             </motion.div>
           )}
