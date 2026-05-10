@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingCart, User, Menu, X, Search, Heart } from "lucide-react";
+import { ShoppingCart, User, Menu, X, Search, Heart, Minus, Plus } from "lucide-react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useCartStore } from "@/store/useCartStore";

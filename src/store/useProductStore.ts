@@ -39,7 +39,8 @@ const INITIAL_PRODUCTS: Product[] = [
     rating: 4.8, 
     images: ["/images/travel.png"],
     inStock: true,
-    stockQuantity: 45
+    stockQuantity: 45,
+    allowCustomization: false
   },
   { 
     id: 2, 
@@ -52,7 +53,8 @@ const INITIAL_PRODUCTS: Product[] = [
     rating: 4.9, 
     images: ["/images/laptop.png"],
     inStock: true,
-    stockQuantity: 12
+    stockQuantity: 12,
+    allowCustomization: false
   },
 ];
 
