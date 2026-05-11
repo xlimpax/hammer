@@ -240,21 +240,19 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
               <button 
                 onClick={() => {
                   handleAddToCart();
-                  // Scroll down to the next action
                   const container = document.querySelector('.custom-scrollbar');
                   if (container) {
                     container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
                   }
                 }}
                 disabled={product.stockQuantity === 0}
-                className="w-full bg-[var(--color-brand-orange)] text-white py-5 rounded-2xl font-bold text-xl transition-all shadow-2xl shadow-orange-500/20 flex items-center justify-center gap-3 disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98] active:translate-y-1 hover:shadow-orange-500/40 hover:animate-pulse group relative overflow-hidden cursor-pointer"
+                className="w-full bg-white/5 border-2 border-[var(--color-brand-orange)] text-[var(--color-brand-orange)] py-6 rounded-2xl font-black text-2xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 hover:bg-[var(--color-brand-orange)] hover:text-white group uppercase tracking-[0.2em]"
               >
-                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
-                <ShoppingCart size={24} className="group-hover:rotate-12 transition-transform" /> Add To Cart
+                <ShoppingCart size={28} className="group-hover:rotate-12 transition-transform" /> Add To Cart
               </button>
               <button 
                 onClick={handleOrder}
-                className="w-full bg-[#25D366] text-white py-5 rounded-2xl font-bold text-xl hover:bg-[#128C7E] transition-all flex items-center justify-center gap-3"
+                className="w-full bg-[#25D366]/5 border-2 border-[#25D366] text-[#25D366] py-6 rounded-2xl font-black text-2xl hover:bg-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3 uppercase tracking-[0.2em]"
               >
                 Order via WhatsApp
               </button>
@@ -426,13 +424,13 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
             <button 
               onClick={handleAddToCart}
               disabled={product.stockQuantity === 0}
-              className="w-full bg-[var(--color-brand-orange)] text-white flex items-center justify-center gap-2 py-3 rounded-full font-bold hover:bg-orange-600 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-white/5 border-2 border-[var(--color-brand-orange)] text-[var(--color-brand-orange)] flex items-center justify-center gap-2 py-4 rounded-full font-black text-lg hover:bg-[var(--color-brand-orange)] hover:text-white transition-all disabled:opacity-50 uppercase tracking-widest"
             >
-              <ShoppingCart size={18} /> Add to Cart
+              <ShoppingCart size={20} /> Add to Cart
             </button>
             <button 
               onClick={handleOrder}
-              className="w-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/20 flex items-center justify-center gap-2 py-3 rounded-full font-bold hover:bg-[#25D366] hover:text-white transition-all"
+              className="w-full bg-[#25D366]/5 border-2 border-[#25D366] text-[#25D366] flex items-center justify-center gap-2 py-4 rounded-full font-black text-lg hover:bg-[#25D366] hover:text-white transition-all uppercase tracking-widest"
             >
               Order via WhatsApp
             </button>
