@@ -123,10 +123,12 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
               <motion.div 
                 animate={{ 
                   scale: [1, 1.15, 1],
-                  filter: ["drop-shadow(0 0 5px orange)", "drop-shadow(0 0 25px orange)", "drop-shadow(0 0 5px orange)"]
+                  filter: product.stockQuantity < 50 
+                    ? ["drop-shadow(0 0 5px red)", "drop-shadow(0 0 25px red)", "drop-shadow(0 0 5px red)"]
+                    : ["drop-shadow(0 0 5px orange)", "drop-shadow(0 0 25px orange)", "drop-shadow(0 0 5px orange)"]
                 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                className="bg-gradient-to-r from-orange-600 to-[var(--color-brand-orange)] text-white px-6 py-2 rounded-xl text-lg font-[1000] uppercase tracking-tighter shadow-[0_10px_20px_rgba(255,165,0,0.4)] border-2 border-white/20"
+                className={`${product.stockQuantity < 50 ? 'bg-red-600' : 'bg-gradient-to-r from-orange-600 to-[var(--color-brand-orange)]'} text-white px-6 py-2 rounded-xl text-lg font-[1000] uppercase tracking-tighter shadow-lg border-2 border-white/20`}
               >
                 {product.stockQuantity} <span className="text-[8px] font-black opacity-80">LEFT</span>
               </motion.div>
@@ -361,7 +363,7 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
               transition={{ 
                 scale: { duration: 1, repeat: Infinity, ease: "linear" }
               }}
-              className="text-lg font-[1000] px-4 py-1.5 rounded-xl uppercase tracking-tighter shadow-[0_10px_20px_rgba(255,165,0,0.4)] border-2 border-white/20 bg-[var(--color-brand-orange)] text-white"
+              className={`text-lg font-[1000] px-4 py-1.5 rounded-xl uppercase tracking-tighter shadow-xl border-2 border-white/20 ${product.stockQuantity < 50 ? 'bg-red-600 shadow-red-500/50' : 'bg-[var(--color-brand-orange)] shadow-orange-500/40'} text-white`}
             >
               {product.stockQuantity} <span className="text-[6px] font-black opacity-70">LEFT</span>
             </motion.div>
