@@ -71,23 +71,23 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-7xl z-50 transition-all duration-500 rounded-[20px] md:rounded-[32px] overflow-hidden ${
-          isScrolled ? "glass shadow-2xl py-4" : "bg-black/20 backdrop-blur-md py-6 border border-white/5"
+          isScrolled ? "glass shadow-2xl py-4" : "bg-white/20 backdrop-blur-md py-6 border border-black/5"
         }`}
       >
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="relative z-50">
-            <span className="text-2xl font-black tracking-tighter text-white">
+            <span className="text-2xl font-black tracking-tighter text-[var(--color-brand-white)]">
               HAMMER<span className="text-[var(--color-brand-orange)]">.</span>
             </span>
           </Link>
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">Home</Link>
-            <Link href="/#shop" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">Shop</Link>
-            <Link href="/#collections" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">Collections</Link>
-            <Link href="/#about" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">About</Link>
+            <Link href="/" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]">Home</Link>
+            <Link href="/#shop" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]">Shop</Link>
+            <Link href="/#collections" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]">Collections</Link>
+            <Link href="/#about" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]">About</Link>
             <Link href="/contact" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-orange)]">Contact</Link>
           </nav>
 
@@ -95,7 +95,7 @@ export default function Navbar() {
           <div className="flex items-center gap-5 relative z-50">
             <button 
               onClick={() => setIsOpen(true)}
-              className="text-white hover:text-[var(--color-brand-orange)] transition-colors relative group"
+              className="text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors relative group"
             >
               <ShoppingCart size={20} />
               {mounted && totalItems() > 0 && (
@@ -104,11 +104,11 @@ export default function Navbar() {
                 </span>
               )}
             </button>
-            <Link href="/admin" className="hidden md:block text-white hover:text-[var(--color-brand-orange)] transition-colors">
+            <Link href="/admin" className="hidden md:block text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors">
               <User size={20} />
             </Link>
             <button 
-              className="md:hidden text-white hover:text-[var(--color-brand-orange)] transition-colors"
+              className="md:hidden text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -126,10 +126,10 @@ export default function Navbar() {
               className="md:hidden absolute top-full left-0 right-0 glass border-t border-white/10 overflow-hidden"
             >
               <div className="flex flex-col gap-6 p-6">
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Home</Link>
-                <Link href="/#shop" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Shop</Link>
-                <Link href="/#collections" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Collections</Link>
-                <Link href="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">About</Link>
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors">Home</Link>
+                <Link href="/#shop" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors">Shop</Link>
+                <Link href="/#collections" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors">Collections</Link>
+                <Link href="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-white)] hover:text-[var(--color-brand-orange)] transition-colors">About</Link>
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-orange)] transition-colors">Contact</Link>
               </div>
             </motion.div>
@@ -146,7 +146,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)} 
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm" 
+              className="absolute inset-0 bg-white/40 backdrop-blur-sm" 
             />
             
             <motion.div 
@@ -154,11 +154,11 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-md h-full bg-[var(--color-brand-dark)] shadow-2xl flex flex-col border-l border-white/10"
+              className="relative w-full max-w-md h-full bg-[var(--color-brand-dark)] shadow-2xl flex flex-col border-l border-black/5"
             >
-              <div className="p-8 border-b border-white/10 flex items-center justify-between">
-                <h2 className="text-2xl font-black tracking-tighter text-white">YOUR CART</h2>
-                <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+              <div className="p-8 border-b border-black/5 flex items-center justify-between">
+                <h2 className="text-2xl font-black tracking-tighter text-[var(--color-brand-white)]">YOUR CART</h2>
+                <button onClick={() => setIsOpen(false)} className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-white)] transition-colors">
                   <X size={24} />
                 </button>
               </div>
@@ -173,28 +173,28 @@ export default function Navbar() {
                 ) : (
                   items.map((item) => (
                     <div key={item.id} className="flex gap-4 group">
-                      <div className="w-20 h-20 rounded-2xl bg-black/30 border border-white/5 overflow-hidden shrink-0">
+                      <div className="w-20 h-20 rounded-2xl bg-black/5 border border-black/5 overflow-hidden shrink-0">
                         <Image src={item.image} alt={item.name} width={80} height={80} className="object-contain p-2" />
                       </div>
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between items-start mb-1">
-                          <h4 className="text-sm font-bold text-white line-clamp-1">{item.name}</h4>
-                          <button onClick={() => removeItem(item.id)} className="text-gray-500 hover:text-red-500 transition-colors">
+                          <h4 className="text-sm font-bold text-[var(--color-brand-white)] line-clamp-1">{item.name}</h4>
+                          <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-red-500 transition-colors">
                             <X size={14} />
                           </button>
                         </div>
                         <div className="flex items-center justify-between mt-auto">
-                          <div className="flex items-center bg-white/5 rounded-lg border border-white/10 p-0.5">
+                          <div className="flex items-center bg-black/5 rounded-lg border border-black/5 p-0.5">
                             <button 
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-white"
+                              className="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-[var(--color-brand-white)]"
                             >
                               <Minus size={12} />
                             </button>
-                            <span className="w-8 text-center text-xs font-bold">{item.quantity}</span>
+                            <span className="w-8 text-center text-xs font-bold text-[var(--color-brand-white)]">{item.quantity}</span>
                             <button 
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-6 h-6 flex items-center justify-center text-white"
+                              className="w-6 h-6 flex items-center justify-center text-[var(--color-brand-white)]"
                             >
                               <Plus size={12} />
                             </button>
@@ -208,10 +208,10 @@ export default function Navbar() {
               </div>
 
               {items.length > 0 && (
-                <div className="p-8 border-t border-white/10 bg-black/20">
+                <div className="p-8 border-t border-black/5 bg-black/5">
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-gray-400 font-medium">Total Amount</span>
-                    <Price amount={totalPrice()} className="text-2xl font-black text-white" />
+                    <span className="text-[var(--color-brand-light)] font-medium">Total Amount</span>
+                    <Price amount={totalPrice()} className="text-2xl font-black text-[var(--color-brand-white)]" />
                   </div>
                   <div className="flex flex-col gap-3">
                     {activePaymentModes?.upi !== false && (
@@ -248,14 +248,14 @@ export default function Navbar() {
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/90 backdrop-blur-xl" 
+              className="absolute inset-0 bg-white/40 backdrop-blur-xl" 
               onClick={() => setIsCheckoutModalOpen(false)}
             />
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-md glass rounded-[32px] p-8 border border-white/10"
+              className="relative w-full max-w-md glass rounded-[32px] p-8 border border-black/5 shadow-2xl"
             >
               <AnimatePresence mode="wait">
                 {paymentStep === "form" ? (
@@ -265,16 +265,16 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                   >
-                    <h2 className="text-2xl font-black text-white mb-2 tracking-tighter uppercase">Delivery Details</h2>
-                    <p className="text-gray-400 text-sm mb-6">Enter your address to proceed to payment.</p>
+                    <h2 className="text-2xl font-black text-[var(--color-brand-white)] mb-2 tracking-tighter uppercase">Delivery Details</h2>
+                    <p className="text-[var(--color-brand-light)] text-sm mb-6">Enter your address to proceed to payment.</p>
                     
                     <form onSubmit={handleFinalOrder} className="space-y-4">
                       <div className="flex flex-col gap-2">
-                        <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Full Name</label>
+                        <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Full Name</label>
                         <input 
                           required type="text" value={customerInfo.name} 
                           onChange={e => setCustomerInfo({...customerInfo, name: e.target.value})}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[var(--color-brand-orange)] text-white"
+                          className="w-full bg-black/5 border border-black/5 rounded-xl px-4 py-3 focus:outline-none focus:border-[var(--color-brand-orange)] text-[var(--color-brand-white)]"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
@@ -294,18 +294,18 @@ export default function Navbar() {
                         />
                       </div>
 
-                      <div className="bg-white/5 rounded-2xl p-4 border border-white/5 space-y-2 my-6">
+                      <div className="bg-black/5 rounded-2xl p-4 border border-black/5 space-y-2 my-6">
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-400">Total Price</span>
-                          <span className="text-white font-bold">₹{totalPrice()}</span>
+                          <span className="text-[var(--color-brand-light)]">Total Price</span>
+                          <span className="text-[var(--color-brand-white)] font-bold">₹{totalPrice()}</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-400">Shipping Charge</span>
-                          <span className={shippingFee > 0 ? "text-white font-bold" : "text-green-500 font-bold"}>₹{shippingFee}</span>
+                          <span className="text-[var(--color-brand-light)]">Shipping Charge</span>
+                          <span className={shippingFee > 0 ? "text-[var(--color-brand-white)] font-bold" : "text-green-600 font-bold"}>₹{shippingFee}</span>
                         </div>
-                        <div className="h-px bg-white/10 my-2" />
+                        <div className="h-px bg-black/5 my-2" />
                         <div className="flex justify-between text-lg">
-                          <span className="text-white font-black uppercase tracking-tighter">Grand Total</span>
+                          <span className="text-[var(--color-brand-white)] font-black uppercase tracking-tighter">Grand Total</span>
                           <span className="text-[var(--color-brand-orange)] font-black">₹{grandTotal}</span>
                         </div>
                       </div>
@@ -334,13 +334,13 @@ export default function Navbar() {
                     exit={{ opacity: 0, x: -20 }}
                     className="space-y-6"
                   >
-                    <h2 className="text-2xl font-black text-white mb-2 tracking-tighter uppercase">Payment Options</h2>
-                    <p className="text-gray-400 text-sm mb-6">Select your preferred payment method.</p>
+                    <h2 className="text-2xl font-black text-[var(--color-brand-white)] mb-2 tracking-tighter uppercase">Payment Options</h2>
+                    <p className="text-[var(--color-brand-light)] text-sm mb-6">Select your preferred payment method.</p>
 
                     <div className="space-y-3">
                       {activePaymentModes?.upi !== false && (
-                        <div className="p-6 bg-white border border-white/10 rounded-3xl flex flex-col items-center gap-4 text-center">
-                          <div className="relative w-48 h-48 bg-white rounded-xl p-2 shadow-2xl">
+                        <div className="p-6 bg-white border border-black/10 rounded-3xl flex flex-col items-center gap-4 text-center shadow-xl">
+                          <div className="relative w-48 h-48 bg-white rounded-xl p-2">
                             <Image 
                               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`upi://pay?pa=${upiId}&pn=HAMMER&am=${grandTotal}&cu=INR`)}`}
                               alt="UPI QR Code"
@@ -364,15 +364,15 @@ export default function Navbar() {
                       {activePaymentModes?.cards !== false && (
                         <button 
                           onClick={handlePaymentComplete}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between group hover:border-[var(--color-brand-orange)] transition-all"
+                          className="w-full bg-black/5 border border-black/10 rounded-2xl p-4 flex items-center justify-between group hover:border-[var(--color-brand-orange)] transition-all"
                         >
                           <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-[var(--color-brand-orange)]/20 flex items-center justify-center text-[var(--color-brand-orange)]">
+                            <div className="w-10 h-10 rounded-full bg-[var(--color-brand-orange)]/10 flex items-center justify-center text-[var(--color-brand-orange)]">
                                <User size={20} />
                             </div>
                             <div className="text-left">
-                              <h4 className="text-white font-bold text-sm">Credit / Debit Card</h4>
-                              <p className="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Visa, Mastercard, RuPay</p>
+                              <h4 className="text-[var(--color-brand-white)] font-bold text-sm">Credit / Debit Card</h4>
+                              <p className="text-[var(--color-brand-light)] text-[10px] uppercase font-bold tracking-widest">Visa, Mastercard, RuPay</p>
                             </div>
                           </div>
                           <ChevronRight size={18} className="text-gray-600 group-hover:text-white" />

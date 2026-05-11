@@ -69,7 +69,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
     >
-      <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={onClose} />
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-xl" onClick={onClose} />
       
       <motion.div 
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -77,18 +77,18 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
         className="relative w-full max-w-6xl glass rounded-[40px] overflow-hidden border border-white/10 flex flex-col md:flex-row max-h-[90vh]"
       >
-        <button onClick={onClose} className="absolute top-6 right-6 z-20 text-white/50 hover:text-white transition-colors">
+        <button onClick={onClose} className="absolute top-6 right-6 z-20 text-black/40 hover:text-black transition-colors">
           <X size={32} />
         </button>
 
         {/* Left Side: Image Gallery */}
-        <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col gap-6 bg-black/40">
+        <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col gap-6 bg-[var(--color-brand-gray)]/50">
           <div 
             ref={imgRef}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setShowZoom(true)}
             onMouseLeave={() => setShowZoom(false)}
-            className="relative aspect-square rounded-3xl overflow-hidden bg-[#111] cursor-zoom-in"
+            className="relative aspect-square rounded-3xl overflow-hidden bg-white cursor-zoom-in"
           >
             <Image 
               src={product.images[selectedImage]} 
@@ -105,7 +105,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
               <button 
                 key={i} 
                 onClick={() => setSelectedImage(i)}
-                className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${selectedImage === i ? "border-[var(--color-brand-orange)] scale-105" : "border-white/5 opacity-50 hover:opacity-100"}`}
+                className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${selectedImage === i ? "border-[var(--color-brand-orange)] scale-105" : "border-black/5 opacity-50 hover:opacity-100"}`}
               >
                 <Image src={img} alt="Thumb" fill sizes="80px" className="object-cover" />
               </button>
@@ -135,7 +135,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
             )}
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-5xl font-black text-[var(--color-brand-white)] mb-4 tracking-tighter leading-tight">
             {product.name}
           </h2>
 
@@ -144,7 +144,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <button 
                 onClick={() => setMode("retail")}
-                className={`p-3 rounded-2xl border transition-all text-left relative overflow-hidden group ${mode === "retail" ? "border-[var(--color-brand-orange)] bg-[var(--color-brand-orange)]/10" : "border-white/5 bg-white/5 hover:border-white/10"}`}
+                className={`p-3 rounded-2xl border transition-all text-left relative overflow-hidden group ${mode === "retail" ? "border-[var(--color-brand-orange)] bg-[var(--color-brand-orange)]/5" : "border-black/5 bg-black/5 hover:border-black/10"}`}
               >
                 <div className="absolute top-0 right-0 p-1.5"><span className={`text-[8px] font-bold uppercase tracking-tighter px-1.5 py-0.5 rounded-full ${mode === "retail" ? "bg-[var(--color-brand-orange)] text-white" : "bg-white/10 text-gray-400"}`}>1+ Pic</span></div>
                 <span className="text-gray-400 text-[10px] mb-0.5 block uppercase font-bold opacity-50">Retail</span>
@@ -153,7 +153,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
 
               <button 
                 onClick={() => setMode("wholesale")}
-                className={`p-3 rounded-2xl border transition-all text-left relative overflow-hidden group ${mode === "wholesale" ? "border-green-500 bg-green-500/10" : "border-white/5 bg-white/5 hover:border-white/10"}`}
+                className={`p-3 rounded-2xl border transition-all text-left relative overflow-hidden group ${mode === "wholesale" ? "border-green-600 bg-green-50" : "border-black/5 bg-black/5 hover:border-black/10"}`}
               >
                 <div className="absolute top-0 right-0 p-1.5"><span className={`text-[8px] font-bold uppercase tracking-tighter px-1.5 py-0.5 rounded-full ${mode === "wholesale" ? "bg-green-500 text-white" : "bg-white/10 text-gray-400"}`}>{product.minWholesaleQty || 12}+ Pics</span></div>
                 <span className="text-gray-400 text-[10px] mb-0.5 block uppercase font-bold opacity-50">Wholesale</span>
@@ -162,7 +162,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
 
               <button 
                 onClick={() => setMode("customization")}
-                className={`p-3 rounded-2xl border transition-all text-left relative overflow-hidden group ${mode === "customization" ? "border-blue-500 bg-blue-500/10" : "border-white/5 bg-white/5 hover:border-white/10"}`}
+                className={`p-3 rounded-2xl border transition-all text-left relative overflow-hidden group ${mode === "customization" ? "border-blue-600 bg-blue-50" : "border-black/5 bg-black/5 hover:border-black/10"}`}
               >
                 <div className="absolute top-0 right-0 p-1.5"><span className={`text-[8px] font-bold uppercase tracking-tighter px-1.5 py-0.5 rounded-full ${mode === "customization" ? "bg-blue-500 text-white" : "bg-white/10 text-gray-400"}`}>{product.minCustomizationQty || 100}+ Pics</span></div>
                 <span className="text-gray-400 text-[10px] mb-0.5 block uppercase font-bold opacity-50">Custom</span>
@@ -175,11 +175,11 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
             <div className="flex items-center justify-between glass p-4 rounded-2xl border border-white/5">
                <div className="flex flex-col">
                   <span className="text-xs text-gray-500 uppercase font-bold">Total Price</span>
-                  <Price amount={activePrice * modalQty} className="text-2xl font-black text-white" />
+                  <Price amount={activePrice * modalQty} className="text-2xl font-black text-[var(--color-brand-white)]" />
                </div>
                
                {/* Quantity Selector */}
-               <div className="flex items-center bg-black/30 rounded-xl border border-white/10 p-1">
+               <div className="flex items-center bg-black/5 rounded-xl border border-black/5 p-1">
                 <button 
                   onClick={() => setModalQty(prev => {
                     const min = mode === "retail" ? 1 : mode === "wholesale" ? (product.minWholesaleQty || 12) : (product.minCustomizationQty || 100);
@@ -200,7 +200,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
                 />
                 <button 
                   onClick={() => setModalQty(prev => prev + 1)}
-                  className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-white"
+                  className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-black/5 transition-colors text-[var(--color-brand-white)]"
                 >
                   <Plus size={18} />
                 </button>
@@ -208,15 +208,15 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-3 flex items-center gap-2 uppercase tracking-widest text-xs">Description</h4>
-              <p className="text-gray-400 leading-relaxed text-lg font-light">
+              <h4 className="text-[var(--color-brand-white)] font-bold mb-3 flex items-center gap-2 uppercase tracking-widest text-xs">Description</h4>
+              <p className="text-[var(--color-brand-light)] leading-relaxed text-lg font-light">
                 {product.description || "Premium quality craftsmanship meet modern utility. This HAMMER original is built to endure your toughest journeys while keeping you stylish."}
               </p>
             </div>
 
             {product.features && product.features.length > 0 && (
               <div>
-                <h4 className="text-white font-bold mb-4 flex items-center gap-2 uppercase tracking-widest text-xs">Key Features</h4>
+                <h4 className="text-[var(--color-brand-white)] font-bold mb-4 flex items-center gap-2 uppercase tracking-widest text-xs">Key Features</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {product.features.map((feature: string, i: number) => (
                     <div key={i} className="flex items-start gap-3 text-gray-300">
@@ -302,11 +302,11 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onClick={onSelect}
-      className="group bg-[var(--color-brand-dark)] rounded-2xl border border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col cursor-pointer"
+      className="group bg-white rounded-2xl border border-black/5 overflow-hidden hover:border-black/10 transition-all duration-300 hover:shadow-xl flex flex-col cursor-pointer"
     >
       {/* Image Container */}
-      <div className="relative h-72 w-full bg-[#111] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10" />
+      <div className="relative h-72 w-full bg-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 z-10" />
         
         <AnimatePresence mode="wait">
           <motion.div
@@ -329,15 +329,15 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
         {/* Slider Controls */}
         {product.images.length > 1 && (
           <>
-            <button onClick={prevImage} className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[var(--color-brand-orange)]">
+            <button onClick={prevImage} className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 text-black opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[var(--color-brand-orange)] hover:text-white">
               <ChevronLeft size={20} />
             </button>
-            <button onClick={nextImage} className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[var(--color-brand-orange)]">
+            <button onClick={nextImage} className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 text-black opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[var(--color-brand-orange)] hover:text-white">
               <ChevronRight size={20} />
             </button>
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
               {product.images.map((_: any, i: number) => (
-                <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? "bg-[var(--color-brand-orange)] w-4" : "bg-white/20"}`} />
+                <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImageIndex ? "bg-[var(--color-brand-orange)] w-4" : "bg-black/10"}`} />
               ))}
             </div>
           </>
@@ -368,16 +368,16 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
               fill={i < Math.floor(product.rating) ? "currentColor" : "none"}
             />
           ))}
-          <span className="text-xs text-gray-400 ml-1">({product.rating})</span>
+          <span className="text-xs text-[var(--color-brand-light)] ml-1">({product.rating})</span>
         </div>
-        <h3 className="text-lg font-bold mb-1 truncate">{product.name}</h3>
+        <h3 className="text-lg font-bold mb-1 truncate text-[var(--color-brand-white)]">{product.name}</h3>
         
         <div className="mt-4 flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <Price amount={product.price * (Number(quantity) || 1)} className="text-xl font-bold text-[var(--color-brand-orange)]" />
             
             {/* Quantity Selector */}
-            <div className="flex items-center bg-white/5 rounded-xl border border-white/10 p-1" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center bg-black/5 rounded-xl border border-black/5 p-1" onClick={(e) => e.stopPropagation()}>
               <button 
                 onClick={() => setQuantity(Math.max(1, (Number(quantity) || 1) - 1))}
                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-gray-400"
@@ -394,7 +394,7 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
               />
               <button 
                 onClick={() => setQuantity((Number(quantity) || 0) + 1)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-white"
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5 transition-colors text-[var(--color-brand-white)]"
               >
                 <Plus size={14} />
               </button>
@@ -439,8 +439,8 @@ export default function FeaturedProducts() {
     <section id="shop" className="py-24 bg-[var(--color-brand-gray)] border-y border-white/5">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Featured Products</h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-base md:text-lg">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-[var(--color-brand-white)]">Featured Products</h2>
+          <p className="text-[var(--color-brand-light)] max-w-xl mx-auto text-base md:text-lg">
             Our most popular and highly rated bags. Designed for performance, crafted for style.
           </p>
         </div>

@@ -16,7 +16,7 @@ export default function TrendingBar() {
   if (!isMounted) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-black/80 backdrop-blur-md text-white border-t border-white/10 py-3 z-[60] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+    <div className="fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-md text-black border-t border-black/10 py-3 z-[60] shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
       <div className="container mx-auto px-6 overflow-hidden">
         <motion.div 
           initial={{ x: "100%" }}

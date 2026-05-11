@@ -16,8 +16,8 @@ export default function HeroSection() {
   return (
     <section id="home" className="relative w-full min-h-screen flex items-center overflow-hidden bg-[var(--color-brand-dark)]">
       {/* Background Gradient & Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-brand-dark)] via-[var(--color-brand-dark)] to-[#1a0e0a]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-brand-orange)]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[var(--color-brand-dark)]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-brand-orange)]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between relative z-10 pt-10">
         
@@ -35,7 +35,7 @@ export default function HeroSection() {
                 duration: 2, 
                 backgroundColor: { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
               }}
-              className="inline-flex items-center gap-2 border border-[var(--color-brand-orange)]/30 text-white px-5 py-2.5 rounded-full w-fit mx-auto md:mx-0 font-black text-[10px] uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(255,87,34,0.1)]"
+              className="inline-flex items-center gap-2 border border-[var(--color-brand-orange)]/20 text-[var(--color-brand-white)] px-5 py-2.5 rounded-full w-fit mx-auto md:mx-0 font-black text-[10px] uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(255,87,34,0.05)]"
             >
               <span className="w-2 h-2 rounded-full bg-[var(--color-brand-orange)] shadow-[0_0_10px_var(--color-brand-orange)] animate-ping" />
               {heroBadge}
@@ -45,7 +45,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-white"
+            className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-[var(--color-brand-white)]"
           >
             Premium Bags <br/>
             For <span className="text-[var(--color-brand-orange)]">Everyday Life</span>
@@ -55,7 +55,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg text-gray-400 max-w-lg mx-auto md:mx-0 font-light"
+            className="text-lg text-[var(--color-brand-light)] max-w-lg mx-auto md:mx-0 font-light"
           >
             Carry Power. Carry HAMMER. Discover our exclusive collection of bags crafted for durability, comfort, and unparalleled style.
           </motion.p>
@@ -66,10 +66,10 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start mt-6"
           >
-            <button className="w-full sm:w-auto bg-[var(--color-brand-orange)] text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-[#e64a19] transition-all shadow-[0_0_20px_rgba(255,87,34,0.3)] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)]">
+            <button className="w-full sm:w-auto bg-[var(--color-brand-orange)] text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-[#e64a19] transition-all shadow-[0_0_20px_rgba(211,84,0,0.3)] hover:shadow-[0_0_30px_rgba(211,84,0,0.5)]">
               Shop Now
             </button>
-            <button className="w-full sm:w-auto bg-transparent border border-white/20 text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-white/5 transition-all">
+            <button className="w-full sm:w-auto bg-transparent border border-black/10 text-[var(--color-brand-white)] px-8 py-4 rounded-full font-semibold text-sm hover:bg-black/5 transition-all">
               Explore Bags
             </button>
           </motion.div>

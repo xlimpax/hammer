@@ -13,10 +13,10 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-[var(--color-brand-white)] mb-4">
             Contact <span className="text-[var(--color-brand-orange)]">Us</span>
           </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
+          <p className="text-[var(--color-brand-light)] max-w-2xl mx-auto text-lg font-light">
             Have questions about our products or your order? We're here to help. Reach out to the HAMMER team.
           </p>
         </motion.div>
@@ -29,8 +29,8 @@ export default function ContactPage() {
             transition={{ delay: 0.2 }}
             className="flex flex-col gap-8"
           >
-            <div className="glass p-8 rounded-3xl border border-white/10">
-              <h2 className="text-2xl font-bold mb-8">Get In Touch</h2>
+            <div className="glass p-8 rounded-3xl border border-black/5 shadow-xl">
+              <h2 className="text-2xl font-bold mb-8 text-[var(--color-brand-white)]">Get In Touch</h2>
               
               <div className="flex flex-col gap-8">
                 <div className="flex items-start gap-5">
@@ -38,12 +38,12 @@ export default function ContactPage() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1 text-lg">Our Store</h4>
+                    <h4 className="font-bold text-[var(--color-brand-white)] mb-1 text-lg">Our Store</h4>
                     <a 
                       href="https://share.google/kymZSKfMG8Y5lQ6Qb" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[var(--color-brand-orange)] transition-colors"
+                      className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] transition-colors"
                     >
                       Ashutosh Colony, Vivekananda Park, Sreenagar, Habra, West Bengal 743271
                     </a>
@@ -55,8 +55,8 @@ export default function ContactPage() {
                     <Phone size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1 text-lg">Call/WhatsApp</h4>
-                    <p className="text-gray-400">+91 9903747606</p>
+                    <h4 className="font-bold text-[var(--color-brand-white)] mb-1 text-lg">Call/WhatsApp</h4>
+                    <p className="text-[var(--color-brand-light)]">+91 9903747606</p>
                   </div>
                 </div>
 
@@ -65,8 +65,8 @@ export default function ContactPage() {
                     <Mail size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1 text-lg">Email Us</h4>
-                    <p className="text-gray-400">xlimpax@gmail.com</p>
+                    <h4 className="font-bold text-[var(--color-brand-white)] mb-1 text-lg">Email Us</h4>
+                    <p className="text-[var(--color-brand-light)]">xlimpax@gmail.com</p>
                   </div>
                 </div>
 
@@ -75,17 +75,17 @@ export default function ContactPage() {
                     <Clock size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1 text-lg">Working Hours</h4>
-                    <p className="text-gray-400">Mon - Sat: 10:00 AM - 08:00 PM</p>
+                    <h4 className="font-bold text-[var(--color-brand-white)] mb-1 text-lg">Working Hours</h4>
+                    <p className="text-[var(--color-brand-light)]">Mon - Sat: 10:00 AM - 08:00 PM</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Newsletter Shortcut */}
-            <div className="bg-gradient-to-br from-[var(--color-brand-orange)]/20 to-transparent p-8 rounded-3xl border border-white/5">
-              <h3 className="text-xl font-bold mb-2">Join the Club</h3>
-              <p className="text-gray-400 text-sm mb-0">Subscribe to get notified about new drops and special discounts.</p>
+            <div className="bg-gradient-to-br from-[var(--color-brand-orange)]/5 to-transparent p-8 rounded-3xl border border-black/5">
+              <h3 className="text-xl font-bold mb-2 text-[var(--color-brand-white)]">Join the Club</h3>
+              <p className="text-[var(--color-brand-light)] text-sm mb-0">Subscribe to get notified about new drops and special discounts.</p>
             </div>
           </motion.div>
 
@@ -94,45 +94,45 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="glass p-10 rounded-3xl border border-white/10"
+            className="glass p-10 rounded-3xl border border-black/5 shadow-2xl"
           >
-            <h2 className="text-2xl font-bold mb-8">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold mb-8 text-[var(--color-brand-white)]">Send Us a Message</h2>
             
             <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium text-gray-400">Your Name</label>
+                  <label className="text-sm font-medium text-[var(--color-brand-light)]">Your Name</label>
                   <input 
                     type="text" 
                     placeholder="John Doe" 
-                    className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
+                    className="bg-black/5 border border-black/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium text-gray-400">Email Address</label>
+                  <label className="text-sm font-medium text-[var(--color-brand-light)]">Email Address</label>
                   <input 
                     type="email" 
                     placeholder="john@example.com" 
-                    className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
+                    className="bg-black/5 border border-black/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]"
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-gray-400">Subject</label>
+                <label className="text-sm font-medium text-[var(--color-brand-light)]">Subject</label>
                 <input 
                   type="text" 
                   placeholder="How can we help?" 
-                  className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
+                  className="bg-black/5 border border-black/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)]"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-gray-400">Message</label>
+                <label className="text-sm font-medium text-[var(--color-brand-light)]">Message</label>
                 <textarea 
                   rows={5}
                   placeholder="Write your message here..." 
-                  className="bg-black/50 border border-white/10 rounded-3xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white resize-none"
+                  className="bg-black/5 border border-black/10 rounded-3xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-white)] resize-none"
                 ></textarea>
               </div>
 

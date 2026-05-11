@@ -14,9 +14,9 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:w-1/2 relative h-[500px] rounded-3xl overflow-hidden border border-white/10"
+          className="w-full lg:w-1/2 relative h-[500px] rounded-3xl overflow-hidden border border-black/5 shadow-xl"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/20 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent z-10" />
           {/* Using hero image as brand placeholder */}
           <Image 
             src="/images/travel.png" 
@@ -48,9 +48,9 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg text-gray-400 font-light leading-relaxed"
+            className="text-lg text-[var(--color-brand-light)] font-light leading-relaxed"
           >
-            <strong className="text-white font-medium">HAMMER</strong> creates stylish, durable, and comfortable bags designed for modern lifestyles. We believe that what you carry shouldn't weigh you down, but empower you to move forward.
+            <strong className="text-[var(--color-brand-white)] font-medium">HAMMER</strong> creates stylish, durable, and comfortable bags designed for modern lifestyles. We believe that what you carry shouldn't weigh you down, but empower you to move forward.
           </motion.p>
 
           <motion.p 
@@ -58,7 +58,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-400 font-light leading-relaxed mb-4"
+            className="text-lg text-[var(--color-brand-light)] font-light leading-relaxed mb-4"
           >
             Born from the necessity of reliable gear, our products blend premium materials with functional design. Whether you're commuting to the office, heading to the gym, or traveling across the globe, HAMMER ensures you carry power everywhere you go.
           </motion.p>
@@ -68,19 +68,19 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex gap-8 border-t border-white/10 pt-8"
+            className="flex gap-8 border-t border-black/10 pt-8"
           >
             <div>
-              <h4 className="text-4xl font-bold text-white mb-2">1M+</h4>
-              <p className="text-sm text-gray-400">Happy Customers</p>
+              <h4 className="text-4xl font-bold text-[var(--color-brand-white)] mb-2">1M+</h4>
+              <p className="text-sm text-[var(--color-brand-light)]">Happy Customers</p>
             </div>
             <div>
-              <h4 className="text-4xl font-bold text-white mb-2">10+</h4>
-              <p className="text-sm text-gray-400">Years of Quality</p>
+              <h4 className="text-4xl font-bold text-[var(--color-brand-white)] mb-2">10+</h4>
+              <p className="text-sm text-[var(--color-brand-light)]">Years of Quality</p>
             </div>
             <div>
               <h4 className="text-4xl font-bold text-[var(--color-brand-orange)] mb-2">100%</h4>
-              <p className="text-sm text-gray-400">Durability Guarantee</p>
+              <p className="text-sm text-[var(--color-brand-light)]">Durability Guarantee</p>
             </div>
           </motion.div>
         </div>
