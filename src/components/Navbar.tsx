@@ -67,6 +67,11 @@ export default function Navbar() {
     setIsCheckoutModalOpen(false);
   };
 
+  const handleUpiDeepLink = () => {
+    const upiUrl = `upi://pay?pa=${upiId}&pn=HAMMER&am=${grandTotal}&cu=INR&tn=Order_from_HAMMER`;
+    window.location.href = upiUrl;
+  };
+
   return (
     <>
       <header
@@ -354,12 +359,20 @@ export default function Navbar() {
                             <p className="text-black font-black text-sm uppercase tracking-tighter">Scan to Pay ₹{grandTotal}</p>
                             <p className="text-gray-500 text-[10px] font-bold uppercase">{upiId}</p>
                           </div>
-                          <button 
-                            onClick={handlePaymentComplete}
-                            className="w-full bg-[var(--color-brand-orange)] text-white py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-all"
-                          >
-                            I Have Paid
-                          </button>
+                          <div className="w-full flex flex-col gap-2">
+                            <button 
+                              onClick={handleUpiDeepLink}
+                              className="w-full bg-blue-600 text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-lg"
+                            >
+                              Pay with Any UPI App
+                            </button>
+                            <button 
+                              onClick={handlePaymentComplete}
+                              className="w-full bg-white/10 text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/20 transition-all"
+                            >
+                              I Have Paid
+                            </button>
+                          </div>
                         </div>
                       )}
 
