@@ -1,13 +1,23 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+interface SocialLinks {
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  youtube: string;
+  whatsapp: string;
+}
+
 interface MessageState {
   announcements: string[];
   trending: string[];
   heroBadge: string;
+  socialLinks: SocialLinks;
   updateAnnouncements: (messages: string[]) => void;
   updateTrending: (messages: string[]) => void;
   updateHeroBadge: (message: string) => void;
+  updateSocialLinks: (links: SocialLinks) => void;
 }
 
 export const useMessageStore = create<MessageState>()(
@@ -24,10 +34,18 @@ export const useMessageStore = create<MessageState>()(
         "4.9/5 Rating from 2,000+ Customers"
       ],
       heroBadge: "Limited Time Offer: Get 20% Off + Free Shipping!",
+      socialLinks: {
+        facebook: "https://facebook.com",
+        instagram: "https://instagram.com",
+        twitter: "https://twitter.com",
+        youtube: "https://youtube.com",
+        whatsapp: "https://wa.me/919903747606",
+      },
 
       updateAnnouncements: (messages) => set({ announcements: messages }),
       updateTrending: (messages) => set({ trending: messages }),
       updateHeroBadge: (message) => set({ heroBadge: message }),
+      updateSocialLinks: (links) => set({ socialLinks: links }),
     }),
     {
       name: 'hammer-messages',

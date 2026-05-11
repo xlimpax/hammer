@@ -44,6 +44,7 @@ export default function CategoriesSection() {
                       src={cat.image} 
                       alt={cat.name} 
                       fill 
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-contain drop-shadow-xl"
                     />
                   </div>

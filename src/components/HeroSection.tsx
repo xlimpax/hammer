@@ -91,6 +91,7 @@ export default function HeroSection() {
               src="/images/hero.png" 
               alt="Premium HAMMER Bag" 
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20"
               priority
             />

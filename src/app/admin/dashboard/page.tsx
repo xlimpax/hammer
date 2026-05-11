@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, LayoutDashboard, Package, LogOut, X, Image as ImageIcon } from "lucide-react";
+import { Plus, Edit2, Trash2, LayoutDashboard, Package, LogOut, X, Image as ImageIcon, Truck, CreditCard, Share2 } from "lucide-react";
 import Image from "next/image";
 import { useProductStore } from "@/store/useProductStore";
 import { useMessageStore } from "@/store/useMessageStore";
@@ -12,7 +12,7 @@ import { MessageSquare } from "lucide-react";
 export default function AdminDashboard() {
   const router = useRouter();
   const { products, addProduct, updateProduct, deleteProduct, retailShippingCharge, updateShippingCharge, upiId, activePaymentModes, updatePaymentSettings } = useProductStore();
-  const { announcements, trending, heroBadge, updateAnnouncements, updateTrending, updateHeroBadge } = useMessageStore();
+  const { announcements, trending, heroBadge, socialLinks, updateAnnouncements, updateTrending, updateHeroBadge, updateSocialLinks } = useMessageStore();
   
   const [activeTab, setActiveTab] = useState("products");
   const [isMounted, setIsMounted] = useState(false);
@@ -43,6 +43,7 @@ export default function AdminDashboard() {
   const [localShippingCharge, setLocalShippingCharge] = useState(0);
   const [localUpiId, setLocalUpiId] = useState("");
   const [localPaymentModes, setLocalPaymentModes] = useState({ whatsapp: true, upi: true, cards: true });
+  const [localSocialLinks, setLocalSocialLinks] = useState({ facebook: "", instagram: "", twitter: "", youtube: "", whatsapp: "" });
 
   useEffect(() => {
     setIsMounted(true);
@@ -55,7 +56,8 @@ export default function AdminDashboard() {
     setLocalShippingCharge(retailShippingCharge);
     setLocalUpiId(upiId);
     setLocalPaymentModes(activePaymentModes);
-  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes]);
+    if (socialLinks) setLocalSocialLinks(socialLinks);
+  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes, socialLinks]);
 
   if (!isMounted) return null;
 
@@ -64,12 +66,13 @@ export default function AdminDashboard() {
     router.push("/admin/login");
   };
 
-  const handleSaveMessages = () => {
+  const handleSaveSettings = () => {
     updateAnnouncements(localAnnouncements);
     updateTrending(localTrending);
     updateHeroBadge(localHeroBadge);
     updateShippingCharge(localShippingCharge);
     updatePaymentSettings(localPaymentModes, localUpiId);
+    updateSocialLinks(localSocialLinks);
     alert("All settings updated successfully!");
   };
 
@@ -183,7 +186,10 @@ export default function AdminDashboard() {
       announcements,
       trending,
       heroBadge,
-      retailShippingCharge
+      retailShippingCharge,
+      socialLinks,
+      upiId,
+      activePaymentModes
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -208,6 +214,9 @@ export default function AdminDashboard() {
             updateTrending(data.trending || []);
             updateHeroBadge(data.heroBadge || "");
             if (data.retailShippingCharge !== undefined) updateShippingCharge(data.retailShippingCharge);
+            if (data.socialLinks) updateSocialLinks(data.socialLinks);
+            if (data.upiId) updatePaymentSettings(data.activePaymentModes || {}, data.upiId);
+            else if (data.activePaymentModes) updatePaymentSettings(data.activePaymentModes);
             alert("Data imported successfully!");
             window.location.reload();
           }
@@ -240,6 +249,24 @@ export default function AdminDashboard() {
           >
             <MessageSquare size={20} /> Flash Messages
           </button>
+          <button 
+            onClick={() => setActiveTab("shipping")}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "shipping" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
+          >
+            <Truck size={20} /> Shipping Charge
+          </button>
+          <button 
+            onClick={() => setActiveTab("payment")}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "payment" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
+          >
+            <CreditCard size={20} /> Payment Gateway
+          </button>
+          <button 
+            onClick={() => setActiveTab("social")}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "social" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
+          >
+            <Share2 size={20} /> Social Media
+          </button>
         </nav>
 
         <div className="mt-auto flex flex-col gap-2">
@@ -263,7 +290,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="flex-1 p-10 overflow-y-auto max-h-screen">
-        {activeTab === "products" ? (
+        {activeTab === "products" && (
           <>
             <div className="flex justify-between items-center mb-10">
               <div>
@@ -338,8 +365,9 @@ export default function AdminDashboard() {
               </table>
             </div>
           </>
-        ) : (
-          /* ... Messages Tab remains the same ... */
+        )}
+
+        {activeTab === "messages" && (
           <div className="max-w-4xl">
             <div className="mb-10">
               <h1 className="text-3xl font-bold text-white">Flash Messages</h1>
@@ -347,7 +375,6 @@ export default function AdminDashboard() {
             </div>
 
             <div className="flex flex-col gap-8">
-              {/* Top Announcement Bar */}
               <div className="glass p-8 rounded-3xl border border-white/10">
                 <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                   <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
@@ -382,7 +409,6 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {/* Bottom Trending Bar */}
               <div className="glass p-8 rounded-3xl border border-white/10">
                 <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                   <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
@@ -417,7 +443,6 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {/* Hero Section Badge */}
               <div className="glass p-8 rounded-3xl border border-white/10">
                 <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                   <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
@@ -428,7 +453,26 @@ export default function AdminDashboard() {
                   onChange={(e) => setLocalHeroBadge(e.target.value)}
                   className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white"
                 />
-              </div>              {/* Retail Shipping Charge */}
+              </div>
+
+              <button 
+                onClick={handleSaveSettings}
+                className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
+              >
+                Save Messages
+              </button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "shipping" && (
+          <div className="max-w-4xl">
+            <div className="mb-10">
+              <h1 className="text-3xl font-bold text-white">Shipping Settings</h1>
+              <p className="text-gray-400">Configure retail delivery charges.</p>
+            </div>
+
+            <div className="flex flex-col gap-8">
               <div className="glass p-8 rounded-3xl border border-white/10">
                 <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                   <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
@@ -443,11 +487,28 @@ export default function AdminDashboard() {
                 />
               </div>
 
-              {/* Payment Settings */}
+              <button 
+                onClick={handleSaveSettings}
+                className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
+              >
+                Save Shipping Settings
+              </button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "payment" && (
+          <div className="max-w-4xl">
+            <div className="mb-10">
+              <h1 className="text-3xl font-bold text-white">Payment Gateway</h1>
+              <p className="text-gray-400">Configure your UPI ID and active payment methods.</p>
+            </div>
+
+            <div className="flex flex-col gap-8">
               <div className="glass p-8 rounded-3xl border border-white/10">
                 <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                   <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
-                  Payment Gateway Settings
+                  UPI & Payment Modes
                 </h2>
                 
                 <div className="flex flex-col gap-6">
@@ -495,10 +556,55 @@ export default function AdminDashboard() {
               </div>
 
               <button 
-                onClick={handleSaveMessages}
+                onClick={handleSaveSettings}
                 className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
               >
-                Save All Settings
+                Save Payment Settings
+              </button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "social" && (
+          <div className="max-w-4xl">
+            <div className="mb-10">
+              <h1 className="text-3xl font-bold text-white">Social Media</h1>
+              <p className="text-gray-400">Manage your social media profiles.</p>
+            </div>
+
+            <div className="flex flex-col gap-8">
+              <div className="glass p-8 rounded-3xl border border-white/10">
+                <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <span className="w-2 h-8 bg-[var(--color-brand-orange)] rounded-full" />
+                  Social Profile URLs
+                </h2>
+                <div className="flex flex-col gap-4">
+                  {[
+                    { key: "facebook", label: "Facebook", placeholder: "https://facebook.com/yourpage" },
+                    { key: "instagram", label: "Instagram", placeholder: "https://instagram.com/yourprofile" },
+                    { key: "twitter", label: "X (Twitter)", placeholder: "https://twitter.com/yourhandle" },
+                    { key: "youtube", label: "YouTube", placeholder: "https://youtube.com/yourchannel" },
+                    { key: "whatsapp", label: "WhatsApp", placeholder: "https://wa.me/919903747606" },
+                  ].map(({ key, label, placeholder }) => (
+                    <div key={key} className="flex flex-col gap-2">
+                      <label className="text-sm font-medium text-gray-400">{label}</label>
+                      <input
+                        type="text"
+                        value={(localSocialLinks as any)[key] || ""}
+                        onChange={(e) => setLocalSocialLinks({ ...localSocialLinks, [key]: e.target.value })}
+                        placeholder={placeholder}
+                        className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white text-sm"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button 
+                onClick={handleSaveSettings}
+                className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
+              >
+                Save Social Links
               </button>
             </div>
           </div>

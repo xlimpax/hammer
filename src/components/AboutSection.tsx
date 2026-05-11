@@ -22,6 +22,7 @@ export default function AboutSection() {
             src="/images/travel.png" 
             alt="Hammer Brand" 
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover scale-110"
           />
           <div className="absolute bottom-10 left-10 z-20">
