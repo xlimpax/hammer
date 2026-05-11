@@ -94,7 +94,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
               src={product.images[selectedImage]} 
               alt={product.name} 
               fill 
-              className={`object-contain p-10 transition-transform duration-200 ${showZoom ? 'scale-[2.5]' : 'scale-100'}`} 
+              className={`object-cover transition-transform duration-200 ${showZoom ? 'scale-[2.5]' : 'scale-100'}`} 
               style={showZoom ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` } : {}}
             />
           </div>
@@ -304,8 +304,8 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
       className="group bg-[var(--color-brand-dark)] rounded-2xl border border-white/5 overflow-hidden hover:border-white/20 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col cursor-pointer"
     >
       {/* Image Container */}
-      <div className="relative h-72 w-full bg-[#111] p-6 overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
+      <div className="relative h-72 w-full bg-[#111] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10" />
         
         <AnimatePresence mode="wait">
           <motion.div
@@ -313,13 +313,13 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="relative w-full h-full"
+            className="absolute inset-0"
           >
             <Image 
               src={product.images[currentImageIndex]} 
               alt={product.name} 
               fill
-              className="object-contain p-6 drop-shadow-xl"
+              className="object-cover"
             />
           </motion.div>
         </AnimatePresence>
