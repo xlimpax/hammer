@@ -122,16 +122,16 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
             {product.stockQuantity > 0 ? (
               <motion.div 
                 animate={{ 
-                  scale: [1, 1.1, 1],
-                  filter: ["drop-shadow(0 0 0px orange)", "drop-shadow(0 0 15px orange)", "drop-shadow(0 0 0px orange)"]
+                  scale: [1, 1.15, 1],
+                  filter: ["drop-shadow(0 0 5px orange)", "drop-shadow(0 0 25px orange)", "drop-shadow(0 0 5px orange)"]
                 }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="bg-gradient-to-r from-orange-600 to-[var(--color-brand-orange)] text-white px-8 py-3 rounded-2xl text-xl font-[1000] uppercase tracking-tighter shadow-[0_15px_30px_rgba(255,165,0,0.4)] border-2 border-white/20"
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                className="bg-gradient-to-r from-orange-600 to-[var(--color-brand-orange)] text-white px-6 py-2 rounded-xl text-lg font-[1000] uppercase tracking-tighter shadow-[0_10px_20px_rgba(255,165,0,0.4)] border-2 border-white/20"
               >
-                {product.stockQuantity} <span className="text-[10px] font-black opacity-80 ml-1">PIECES LEFT</span>
+                {product.stockQuantity} <span className="text-[8px] font-black opacity-80">LEFT</span>
               </motion.div>
             ) : (
-              <div className="bg-red-600 text-white px-8 py-3 rounded-2xl text-xl font-[1000] uppercase tracking-tighter shadow-[0_15px_30px_rgba(255,0,0,0.4)] border-2 border-white/20">
+              <div className="bg-red-600 text-white px-6 py-2 rounded-xl text-lg font-[1000] uppercase tracking-tighter shadow-[0_10px_20px_rgba(255,0,0,0.4)] border-2 border-white/20">
                 SOLD OUT
               </div>
             )}
@@ -245,13 +245,13 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
                   }
                 }}
                 disabled={product.stockQuantity === 0}
-                className="w-full bg-orange-600/10 border-4 border-[var(--color-brand-orange)] text-[var(--color-brand-orange)] py-7 rounded-[32px] font-[1000] text-3xl transition-all flex items-center justify-center gap-4 disabled:opacity-50 hover:bg-[var(--color-brand-orange)] hover:text-white group uppercase tracking-[0.2em] shadow-[0_0_40px_rgba(255,165,0,0.15)] hover:shadow-[0_0_60px_rgba(255,165,0,0.4)]"
+                className="w-full bg-orange-600/5 border-2 border-[var(--color-brand-orange)] text-[var(--color-brand-orange)] py-5 rounded-[24px] font-[1000] text-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 hover:bg-[var(--color-brand-orange)] hover:text-white group uppercase tracking-widest shadow-[0_0_30px_rgba(255,165,0,0.1)] hover:shadow-[0_0_50px_rgba(255,165,0,0.3)]"
               >
-                <ShoppingCart size={32} className="group-hover:rotate-12 transition-transform" /> Add To Cart
+                <ShoppingCart size={24} className="group-hover:rotate-12 transition-transform" /> Add To Cart
               </button>
               <button 
                 onClick={handleOrder}
-                className="w-full bg-white/5 border-2 border-[#25D366] text-[#25D366] py-5 rounded-[24px] font-black text-xl hover:bg-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3 uppercase tracking-widest"
+                className="w-full bg-white/5 border-2 border-[#25D366] text-[#25D366] py-4 rounded-[20px] font-black text-lg hover:bg-[#25D366] hover:text-white transition-all flex items-center justify-center gap-3 uppercase tracking-widest"
               >
                 Order via WhatsApp
               </button>
@@ -349,24 +349,24 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
         )}
         
         {/* Stock Badge */}
-        <div className="absolute top-6 right-6 flex flex-col gap-2 items-end z-20">
+        <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-20">
           {product.stockQuantity > 0 ? (
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ 
                 opacity: 1, 
                 x: 0,
-                scale: [1, 1.1, 1],
+                scale: [1, 1.15, 1],
               }}
               transition={{ 
-                scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                scale: { duration: 1, repeat: Infinity, ease: "linear" }
               }}
-              className="text-2xl font-[1000] px-6 py-2 rounded-2xl uppercase tracking-tighter shadow-[0_20px_40px_rgba(255,165,0,0.5)] border-2 border-white/20 bg-[var(--color-brand-orange)] text-white"
+              className="text-lg font-[1000] px-4 py-1.5 rounded-xl uppercase tracking-tighter shadow-[0_10px_20px_rgba(255,165,0,0.4)] border-2 border-white/20 bg-[var(--color-brand-orange)] text-white"
             >
-              {product.stockQuantity} <span className="text-[8px] font-black opacity-70">LEFT</span>
+              {product.stockQuantity} <span className="text-[6px] font-black opacity-70">LEFT</span>
             </motion.div>
           ) : (
-            <div className="text-xl bg-red-600 text-white px-6 py-2 rounded-2xl font-[1000] uppercase tracking-tighter shadow-2xl border-2 border-white/20">
+            <div className="text-sm bg-red-600 text-white px-4 py-1.5 rounded-xl font-[1000] uppercase tracking-tighter shadow-xl border-2 border-white/20">
               SOLD OUT
             </div>
           )}
