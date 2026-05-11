@@ -38,7 +38,8 @@ export default function ContactPage() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white mb-1 text-lg">Our Store</h4>
+                    <h4 className="font-bold text-white mb-1 text-lg">XL IMPAX BAG MANUFACTURER</h4>
+                    <p className="text-[10px] font-black text-[var(--color-brand-orange)] uppercase tracking-widest mb-1">XL BAG FACTORY</p>
                     <a 
                       href="https://share.google/kymZSKfMG8Y5lQ6Qb" 
                       target="_blank" 
@@ -84,7 +85,7 @@ export default function ContactPage() {
 
             {/* Newsletter Shortcut */}
             <div className="bg-gradient-to-br from-[var(--color-brand-orange)]/20 to-transparent p-8 rounded-3xl border border-white/5">
-              <h3 className="text-xl font-bold mb-2">Join the Club</h3>
+              <h3 className="text-xl font-bold mb-2 text-white">Join the Club</h3>
               <p className="text-gray-400 text-sm mb-0">Subscribe to get notified about new drops and special discounts.</p>
             </div>
           </motion.div>
@@ -96,7 +97,7 @@ export default function ContactPage() {
             transition={{ delay: 0.2 }}
             className="glass p-10 rounded-3xl border border-white/10"
           >
-            <h2 className="text-2xl font-bold mb-8">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold mb-8 text-white">Send Us a Message</h2>
             
             <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -138,14 +139,33 @@ export default function ContactPage() {
 
               <button 
                 type="submit" 
-                className="bg-[var(--color-brand-orange)] hover:bg-orange-600 text-white font-bold rounded-2xl py-4 flex items-center justify-center gap-2 transition-all shadow-lg shadow-[var(--color-brand-orange)]/20"
+                className="bg-[var(--color-brand-orange)] hover:bg-orange-600 text-white font-bold rounded-2xl py-4 flex items-center justify-center gap-2 transition-all shadow-lg shadow-[var(--color-brand-orange)]/20 uppercase tracking-widest text-sm"
               >
                 Send Message <Send size={20} />
               </button>
             </form>
           </motion.div>
         </div>
+
+        {/* Map Location */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 glass p-4 rounded-[40px] border border-white/10 overflow-hidden"
+        >
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.123456789!2d88.666666!3d22.8464672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8bc2773410a51%3A0xe54d65012543e061!2sAshutosh%20Colony%2C%20Habra%2C%20West%20Bengal%20743271!5e0!3m2!1sen!2sin!4v1715418000000!5m2!1sen!2sin" 
+            width="100%" 
+            height="450" 
+            style={{ border: 0, borderRadius: '32px', filter: 'invert(90%) hue-rotate(180deg) brightness(0.8)' }} 
+            allowFullScreen={true} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </motion.div>
       </div>
+    </div>
     </div>
   );
 }
