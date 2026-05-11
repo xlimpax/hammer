@@ -125,7 +125,7 @@ export default function Footer() {
             <h4 className="text-[var(--color-brand-white)] font-bold mb-6 text-lg">Customer Service</h4>
             <ul className="flex flex-col gap-3">
               <li>
-                <Link href="#" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                <Link href="/faq" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
                   FAQ
                 </Link>
               </li>

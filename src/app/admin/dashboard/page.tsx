@@ -13,7 +13,7 @@ import { useCareerStore } from "@/store/useCareerStore";
 export default function AdminDashboard() {
   const router = useRouter();
   const { products, addProduct, updateProduct, deleteProduct, retailShippingCharge, updateShippingCharge, upiId, activePaymentModes, updatePaymentSettings } = useProductStore();
-  const { announcements, trending, heroBadge, socialLinks, returnsPolicy, updateAnnouncements, updateTrending, updateHeroBadge, updateSocialLinks, updateReturnsPolicy } = useMessageStore();
+  const { announcements, trending, heroBadge, socialLinks, returnsPolicy, faqs, updateAnnouncements, updateTrending, updateHeroBadge, updateSocialLinks, updateReturnsPolicy, updateFaqs } = useMessageStore();
   const { applications, updateStatus, deleteApplication } = useCareerStore();
   
   const [activeTab, setActiveTab] = useState("products");
@@ -47,6 +47,7 @@ export default function AdminDashboard() {
   const [localPaymentModes, setLocalPaymentModes] = useState({ whatsapp: true, upi: true, cards: true });
   const [localSocialLinks, setLocalSocialLinks] = useState({ facebook: "", instagram: "", twitter: "", youtube: "", whatsapp: "" });
   const [localReturnsPolicy, setLocalReturnsPolicy] = useState("");
+  const [localFaqs, setLocalFaqs] = useState<any[]>([]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -61,7 +62,8 @@ export default function AdminDashboard() {
     setLocalPaymentModes(activePaymentModes);
     if (socialLinks) setLocalSocialLinks(socialLinks);
     if (returnsPolicy) setLocalReturnsPolicy(returnsPolicy);
-  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes, socialLinks, returnsPolicy]);
+    if (faqs) setLocalFaqs(faqs);
+  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes, socialLinks, returnsPolicy, faqs]);
 
   if (!isMounted) return null;
 
@@ -78,6 +80,7 @@ export default function AdminDashboard() {
     updatePaymentSettings(localPaymentModes, localUpiId);
     updateSocialLinks(localSocialLinks);
     updateReturnsPolicy(localReturnsPolicy);
+    updateFaqs(localFaqs);
     alert("All settings updated successfully!");
   };
 
@@ -664,6 +667,62 @@ export default function AdminDashboard() {
                 className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
               >
                 Update Policy
+              </button>
+
+              <div className="glass p-8 rounded-3xl border border-white/10 mt-12">
+                <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <HelpCircle className="text-[var(--color-brand-orange)]" />
+                  Frequently Asked Questions
+                </h2>
+                <div className="flex flex-col gap-6">
+                  {localFaqs.map((faq, i) => (
+                    <div key={i} className="bg-black/30 p-6 rounded-2xl border border-white/5 space-y-4">
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[10px] font-bold text-gray-500 uppercase">Question</label>
+                        <input 
+                          value={faq.question}
+                          onChange={(e) => {
+                            const newFaqs = [...localFaqs];
+                            newFaqs[i].question = e.target.value;
+                            setLocalFaqs(newFaqs);
+                          }}
+                          className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-[var(--color-brand-orange)]"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[10px] font-bold text-gray-500 uppercase">Answer</label>
+                        <textarea 
+                          value={faq.answer}
+                          onChange={(e) => {
+                            const newFaqs = [...localFaqs];
+                            newFaqs[i].answer = e.target.value;
+                            setLocalFaqs(newFaqs);
+                          }}
+                          className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white text-sm h-24 resize-none focus:border-[var(--color-brand-orange)]"
+                        />
+                      </div>
+                      <button 
+                        onClick={() => setLocalFaqs(localFaqs.filter((_, idx) => idx !== i))}
+                        className="text-red-500 text-xs font-bold hover:underline"
+                      >
+                        Delete Question
+                      </button>
+                    </div>
+                  ))}
+                  <button 
+                    onClick={() => setLocalFaqs([...localFaqs, { question: "New Question", answer: "New Answer" }])}
+                    className="w-full py-4 border-2 border-dashed border-white/10 rounded-2xl text-gray-500 hover:text-white hover:border-white/20 transition-all font-bold"
+                  >
+                    + Add New FAQ
+                  </button>
+                </div>
+              </div>
+
+              <button 
+                onClick={handleSaveSettings}
+                className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
+              >
+                Save All Policies
               </button>
             </div>
           </div>
