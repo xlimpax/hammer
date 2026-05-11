@@ -13,10 +13,12 @@ interface MessageState {
   announcements: string[];
   trending: string[];
   heroBadge: string;
+  returnsPolicy: string;
   socialLinks: SocialLinks;
   updateAnnouncements: (messages: string[]) => void;
   updateTrending: (messages: string[]) => void;
   updateHeroBadge: (message: string) => void;
+  updateReturnsPolicy: (policy: string) => void;
   updateSocialLinks: (links: SocialLinks) => void;
 }
 
@@ -34,6 +36,7 @@ export const useMessageStore = create<MessageState>()(
         "4.9/5 Rating from 2,000+ Customers"
       ],
       heroBadge: "Limited Time Offer: Get 20% Off + Free Shipping!",
+      returnsPolicy: "### Returns & Exchanges\n\nAt HAMMER, we strive for perfection. If you are not satisfied with your purchase, we offer a **7-day return and exchange policy**.\n\n#### Conditions for Returns:\n* Product must be unused and in original packaging.\n* All tags and labels must be intact.\n* Proof of purchase (invoice) is mandatory.\n\n#### Non-Returnable Items:\n* Customized/Personalized bags.\n* Items purchased during clearance sales.",
       socialLinks: {
         facebook: "https://facebook.com",
         instagram: "https://instagram.com",
@@ -45,6 +48,7 @@ export const useMessageStore = create<MessageState>()(
       updateAnnouncements: (messages) => set({ announcements: messages }),
       updateTrending: (messages) => set({ trending: messages }),
       updateHeroBadge: (message) => set({ heroBadge: message }),
+      updateReturnsPolicy: (policy) => set({ returnsPolicy: policy }),
       updateSocialLinks: (links) => set({ socialLinks: links }),
     }),
     {

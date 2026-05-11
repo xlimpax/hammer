@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, LayoutDashboard, Package, LogOut, X, Image as ImageIcon, Truck, CreditCard, Share2 } from "lucide-react";
+import { Plus, Edit2, Trash2, LayoutDashboard, Package, LogOut, X, Image as ImageIcon, Truck, CreditCard, Share2, FileText, RefreshCcw } from "lucide-react";
 import Image from "next/image";
 import { useProductStore } from "@/store/useProductStore";
 import { useMessageStore } from "@/store/useMessageStore";
@@ -13,7 +13,7 @@ import { useCareerStore } from "@/store/useCareerStore";
 export default function AdminDashboard() {
   const router = useRouter();
   const { products, addProduct, updateProduct, deleteProduct, retailShippingCharge, updateShippingCharge, upiId, activePaymentModes, updatePaymentSettings } = useProductStore();
-  const { announcements, trending, heroBadge, socialLinks, updateAnnouncements, updateTrending, updateHeroBadge, updateSocialLinks } = useMessageStore();
+  const { announcements, trending, heroBadge, socialLinks, returnsPolicy, updateAnnouncements, updateTrending, updateHeroBadge, updateSocialLinks, updateReturnsPolicy } = useMessageStore();
   const { applications, updateStatus, deleteApplication } = useCareerStore();
   
   const [activeTab, setActiveTab] = useState("products");
@@ -46,6 +46,7 @@ export default function AdminDashboard() {
   const [localUpiId, setLocalUpiId] = useState("");
   const [localPaymentModes, setLocalPaymentModes] = useState({ whatsapp: true, upi: true, cards: true });
   const [localSocialLinks, setLocalSocialLinks] = useState({ facebook: "", instagram: "", twitter: "", youtube: "", whatsapp: "" });
+  const [localReturnsPolicy, setLocalReturnsPolicy] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
@@ -59,7 +60,8 @@ export default function AdminDashboard() {
     setLocalUpiId(upiId);
     setLocalPaymentModes(activePaymentModes);
     if (socialLinks) setLocalSocialLinks(socialLinks);
-  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes, socialLinks]);
+    if (returnsPolicy) setLocalReturnsPolicy(returnsPolicy);
+  }, [announcements, trending, heroBadge, retailShippingCharge, upiId, activePaymentModes, socialLinks, returnsPolicy]);
 
   if (!isMounted) return null;
 
@@ -75,6 +77,7 @@ export default function AdminDashboard() {
     updateShippingCharge(localShippingCharge);
     updatePaymentSettings(localPaymentModes, localUpiId);
     updateSocialLinks(localSocialLinks);
+    updateReturnsPolicy(localReturnsPolicy);
     alert("All settings updated successfully!");
   };
 
@@ -273,6 +276,12 @@ export default function AdminDashboard() {
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "social" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
           >
             <Share2 size={20} /> Social Media
+          </button>
+          <button 
+            onClick={() => setActiveTab("policies")}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "policies" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
+          >
+            <FileText size={20} /> Policies
           </button>
           <button 
             onClick={() => setActiveTab("careers")}
@@ -618,6 +627,43 @@ export default function AdminDashboard() {
                 className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
               >
                 Save Social Links
+              </button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "policies" && (
+          <div className="max-w-4xl">
+            <div className="mb-10">
+              <h1 className="text-3xl font-bold text-white">Policy Management</h1>
+              <p className="text-gray-400">Edit the legal and informational policies of the website.</p>
+            </div>
+
+            <div className="flex flex-col gap-8">
+              <div className="glass p-8 rounded-3xl border border-white/10">
+                <h2 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
+                  <RefreshCcw className="text-[var(--color-brand-orange)]" />
+                  Returns & Exchanges Policy
+                </h2>
+                <div className="flex flex-col gap-4">
+                  <label className="text-sm font-medium text-gray-500">Policy Content (Markdown supported)</label>
+                  <textarea 
+                    value={localReturnsPolicy}
+                    onChange={(e) => setLocalReturnsPolicy(e.target.value)}
+                    className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white font-mono text-sm h-[400px] resize-none"
+                    placeholder="Enter policy text here..."
+                  />
+                  <div className="bg-orange-500/10 border border-orange-500/20 p-4 rounded-xl text-xs text-[var(--color-brand-orange)]">
+                    <strong>Pro-tip:</strong> Use ### for headers, #### for sub-headers, and * for bullet points.
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={handleSaveSettings}
+                className="bg-[var(--color-brand-orange)] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl self-end"
+              >
+                Update Policy
               </button>
             </div>
           </div>

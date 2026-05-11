@@ -134,13 +134,16 @@ export default function Footer() {
                   Shipping Policy
                 </Link>
               </li>
-              {['Returns & Exchanges', 'Track Order'].map((link) => (
-                <li key={link}>
-                  <Link href="#" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
-                    {link}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/returns-policy" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  Returns & Exchanges
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  Track Order
+                </Link>
+              </li>
               <li>
                 <Link href="/warranty" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
                   Warranty Policy
