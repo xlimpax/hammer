@@ -124,7 +124,17 @@ export default function Footer() {
           <div>
             <h4 className="text-[var(--color-brand-white)] font-bold mb-6 text-lg">Customer Service</h4>
             <ul className="flex flex-col gap-3">
-              {['FAQ', 'Shipping Policy', 'Returns & Exchanges', 'Track Order'].map((link) => (
+              <li>
+                <Link href="#" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping-policy" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  Shipping Policy
+                </Link>
+              </li>
+              {['Returns & Exchanges', 'Track Order'].map((link) => (
                 <li key={link}>
                   <Link href="#" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
                     {link}
