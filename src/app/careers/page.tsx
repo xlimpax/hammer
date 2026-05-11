@@ -26,9 +26,12 @@ export default function CareersPage() {
   };
 
   const roles = [
+    { title: "Retailer", type: "Partnership", location: "Pan India" },
+    { title: "Wholesaler", type: "Partnership", location: "Pan India" },
     { title: "Product Designer", type: "Full-time", location: "Remote / HQ" },
+    { title: "Bander", type: "Full-time", location: "Habra, WB" },
+    { title: "Stitching Man", type: "Full-time", location: "Habra, WB" },
     { title: "Sales Associate", type: "Full-time", location: "Kolkata, WB" },
-    { title: "Logistics Manager", type: "Full-time", location: "Habra, WB" },
     { title: "Marketing Lead", type: "Full-time", location: "Remote" }
   ];
 
