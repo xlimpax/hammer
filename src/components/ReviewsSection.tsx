@@ -35,14 +35,14 @@ const reviews = [
 
 export default function ReviewsSection() {
   return (
-    <section className="py-24 bg-[var(--color-brand-gray)] border-y border-black/5 relative overflow-hidden">
+    <section className="py-24 bg-[var(--color-brand-gray)] border-y border-white/5 relative overflow-hidden">
       {/* Background Effect */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-brand-orange)]/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight text-[var(--color-brand-white)]">Customer Reviews</h2>
-          <p className="text-[var(--color-brand-light)] max-w-xl mx-auto text-base md:text-lg">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Customer Reviews</h2>
+          <p className="text-gray-400 max-w-xl mx-auto text-base md:text-lg">
             Don't just take our word for it. Here's what our community has to say about carrying HAMMER.
           </p>
         </div>
@@ -57,27 +57,27 @@ export default function ReviewsSection() {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="glass p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300"
             >
-              <Quote className="text-black/5 w-12 h-12 mb-4" />
+              <Quote className="text-white/10 w-12 h-12 mb-4" />
               
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
                     size={16} 
-                    className={i < review.rating ? "fill-[var(--color-brand-orange)] text-[var(--color-brand-orange)]" : "text-gray-300"} 
+                    className={i < review.rating ? "fill-[var(--color-brand-orange)] text-[var(--color-brand-orange)]" : "text-gray-600"} 
                   />
                 ))}
               </div>
 
-              <p className="text-[var(--color-brand-light)] mb-8 italic">"{review.text}"</p>
+              <p className="text-gray-300 mb-8 italic">"{review.text}"</p>
 
               <div className="flex items-center gap-4 mt-auto">
                 <div className={`w-12 h-12 rounded-full ${review.color} flex items-center justify-center font-bold text-lg shadow-inner`}>
                   {review.initials}
                 </div>
                 <div>
-                  <h4 className="font-bold text-[var(--color-brand-white)]">{review.name}</h4>
-                  <p className="text-xs text-[var(--color-brand-light)]">{review.role}</p>
+                  <h4 className="font-bold text-white">{review.name}</h4>
+                  <p className="text-xs text-gray-400">{review.role}</p>
                 </div>
               </div>
             </motion.div>
