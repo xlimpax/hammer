@@ -7,7 +7,7 @@ import { Plus, Edit2, Trash2, LayoutDashboard, Package, LogOut, X, Image as Imag
 import Image from "next/image";
 import { useProductStore } from "@/store/useProductStore";
 import { useMessageStore } from "@/store/useMessageStore";
-import { MessageSquare, Briefcase, CheckCircle2 } from "lucide-react";
+import { MessageSquare, Briefcase, CheckCircle2, Mail, Phone } from "lucide-react";
 import { useCareerStore } from "@/store/useCareerStore";
 
 export default function AdminDashboard() {
