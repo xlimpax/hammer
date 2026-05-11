@@ -117,15 +117,20 @@ export default function Footer() {
 
           {/* Customer Service */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Customer Service</h4>
+            <h4 className="text-[var(--color-brand-white)] font-bold mb-6 text-lg">Customer Service</h4>
             <ul className="flex flex-col gap-3">
-              {['FAQ', 'Shipping Policy', 'Returns & Exchanges', 'Track Order', 'Warranty'].map((link) => (
+              {['FAQ', 'Shipping Policy', 'Returns & Exchanges', 'Track Order'].map((link) => (
                 <li key={link}>
-                  <Link href="#" className="text-gray-400 hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  <Link href="#" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
                     {link}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/warranty" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  Warranty Policy
+                </Link>
+              </li>
             </ul>
           </div>
 
