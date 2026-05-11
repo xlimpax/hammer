@@ -7,12 +7,14 @@ import { Plus, Edit2, Trash2, LayoutDashboard, Package, LogOut, X, Image as Imag
 import Image from "next/image";
 import { useProductStore } from "@/store/useProductStore";
 import { useMessageStore } from "@/store/useMessageStore";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Briefcase, CheckCircle2 } from "lucide-react";
+import { useCareerStore } from "@/store/useCareerStore";
 
 export default function AdminDashboard() {
   const router = useRouter();
   const { products, addProduct, updateProduct, deleteProduct, retailShippingCharge, updateShippingCharge, upiId, activePaymentModes, updatePaymentSettings } = useProductStore();
   const { announcements, trending, heroBadge, socialLinks, updateAnnouncements, updateTrending, updateHeroBadge, updateSocialLinks } = useMessageStore();
+  const { applications, updateStatus, deleteApplication } = useCareerStore();
   
   const [activeTab, setActiveTab] = useState("products");
   const [isMounted, setIsMounted] = useState(false);
@@ -189,7 +191,8 @@ export default function AdminDashboard() {
       retailShippingCharge,
       socialLinks,
       upiId,
-      activePaymentModes
+      activePaymentModes,
+      applications
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -217,6 +220,10 @@ export default function AdminDashboard() {
             if (data.socialLinks) updateSocialLinks(data.socialLinks);
             if (data.upiId) updatePaymentSettings(data.activePaymentModes || {}, data.upiId);
             else if (data.activePaymentModes) updatePaymentSettings(data.activePaymentModes);
+            if (data.applications) {
+              // Note: For demo, we just overwrite. In real app, merge or append.
+              localStorage.setItem('hammer-careers-storage', JSON.stringify({ state: { applications: data.applications } }));
+            }
             alert("Data imported successfully!");
             window.location.reload();
           }
@@ -266,6 +273,12 @@ export default function AdminDashboard() {
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "social" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
           >
             <Share2 size={20} /> Social Media
+          </button>
+          <button 
+            onClick={() => setActiveTab("careers")}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === "careers" ? "bg-[var(--color-brand-orange)] text-white font-bold" : "text-gray-400 hover:bg-white/5"}`}
+          >
+            <Briefcase size={20} /> Careers
           </button>
         </nav>
 
@@ -606,6 +619,86 @@ export default function AdminDashboard() {
               >
                 Save Social Links
               </button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "careers" && (
+          <div className="w-full max-w-6xl">
+            <div className="mb-10">
+              <h1 className="text-3xl font-bold text-white">Career Applications</h1>
+              <p className="text-gray-400">View and manage job applications submitted via the website.</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              {applications.length === 0 ? (
+                <div className="glass p-20 rounded-3xl border border-white/10 text-center">
+                  <Briefcase size={48} className="mx-auto text-gray-600 mb-4" />
+                  <p className="text-gray-500 font-medium">No applications received yet.</p>
+                </div>
+              ) : (
+                applications.map((app) => (
+                  <motion.div 
+                    key={app.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="glass p-8 rounded-3xl border border-white/10"
+                  >
+                    <div className="flex flex-col md:flex-row justify-between gap-6">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-4">
+                          <h3 className="text-xl font-bold text-white">{app.name}</h3>
+                          <span className={`text-[10px] px-2 py-1 rounded-full font-black uppercase tracking-widest ${
+                            app.status === 'pending' ? 'bg-orange-500/10 text-orange-500' :
+                            app.status === 'reviewed' ? 'bg-blue-500/10 text-blue-500' :
+                            app.status === 'accepted' ? 'bg-green-500/10 text-green-500' :
+                            'bg-red-500/10 text-red-500'
+                          }`}>
+                            {app.status}
+                          </span>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                          <div className="flex items-center gap-2 text-sm text-gray-400">
+                            <Mail size={14} className="text-[var(--color-brand-orange)]" /> {app.email}
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-gray-400">
+                            <Phone size={14} className="text-[var(--color-brand-orange)]" /> {app.phone}
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-gray-400">
+                            <Briefcase size={14} className="text-[var(--color-brand-orange)]" /> {app.role}
+                          </div>
+                        </div>
+
+                        <div className="bg-black/30 p-6 rounded-2xl border border-white/5">
+                          <p className="text-sm text-gray-300 leading-relaxed italic">"{app.message}"</p>
+                        </div>
+                        <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-widest font-bold">Applied on: {new Date(app.date).toLocaleDateString()} {new Date(app.date).toLocaleTimeString()}</p>
+                      </div>
+
+                      <div className="flex flex-col gap-2 min-w-[150px]">
+                        <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Update Status</label>
+                        <select 
+                          value={app.status}
+                          onChange={(e) => updateStatus(app.id, e.target.value as any)}
+                          className="bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-[var(--color-brand-orange)]"
+                        >
+                          <option value="pending">Pending</option>
+                          <option value="reviewed">Reviewed</option>
+                          <option value="accepted">Accepted</option>
+                          <option value="rejected">Rejected</option>
+                        </select>
+                        <button 
+                          onClick={() => { if(confirm("Delete this application?")) deleteApplication(app.id); }}
+                          className="mt-2 flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all text-xs font-bold"
+                        >
+                          <Trash2 size={14} /> Delete
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </div>
           </div>
         )}

@@ -103,15 +103,20 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Quick Links</h4>
+            <h4 className="text-[var(--color-brand-white)] font-bold mb-6 text-lg">Quick Links</h4>
             <ul className="flex flex-col gap-3">
               {['Home', 'Shop', 'About Us', 'Contact', 'Blog'].map((link) => (
                 <li key={link}>
-                  <Link href={`#${link.toLowerCase().replace(' ', '-')}`} className="text-gray-400 hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  <Link href={`#${link.toLowerCase().replace(' ', '-')}`} className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
                     {link}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/careers" className="text-[var(--color-brand-light)] hover:text-[var(--color-brand-orange)] text-sm transition-colors">
+                  Careers
+                </Link>
+              </li>
             </ul>
           </div>
 

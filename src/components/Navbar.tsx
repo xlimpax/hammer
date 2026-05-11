@@ -88,6 +88,7 @@ export default function Navbar() {
             <Link href="/#shop" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">Shop</Link>
             <Link href="/#collections" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">Collections</Link>
             <Link href="/#about" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">About</Link>
+            <Link href="/careers" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-white">Careers</Link>
             <Link href="/contact" className="text-sm font-medium hover:text-[var(--color-brand-orange)] transition-colors text-[var(--color-brand-orange)]">Contact</Link>
           </nav>
 
@@ -130,6 +131,7 @@ export default function Navbar() {
                 <Link href="/#shop" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Shop</Link>
                 <Link href="/#collections" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Collections</Link>
                 <Link href="/#about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">About</Link>
+                <Link href="/careers" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white hover:text-[var(--color-brand-orange)] transition-colors">Careers</Link>
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-[var(--color-brand-orange)] transition-colors">Contact</Link>
               </div>
             </motion.div>
