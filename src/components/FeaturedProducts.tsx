@@ -120,13 +120,21 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
               {product.category}
             </span>
             {product.stockQuantity > 0 ? (
-              <span className="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                In Stock ({product.stockQuantity} Left)
-              </span>
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                  rotateX: [0, 10, 0],
+                  rotateY: [0, 10, 0]
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="bg-green-500 text-white px-6 py-2 rounded-2xl text-sm font-black uppercase tracking-widest shadow-[0_10px_20px_rgba(34,197,94,0.3)] border border-green-400/20"
+              >
+                {product.stockQuantity} UNITS LEFT
+              </motion.div>
             ) : (
-              <span className="bg-red-500/10 text-red-500 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                Sold Out
-              </span>
+              <div className="bg-red-500 text-white px-6 py-2 rounded-2xl text-sm font-black uppercase tracking-widest shadow-[0_10px_20px_rgba(239,68,68,0.3)]">
+                OUT OF STOCK
+              </div>
             )}
             {product.allowCustomization && (
               <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-500/20">
@@ -344,15 +352,28 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
         )}
         
         {/* Stock Badge */}
-        <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
+        <div className="absolute top-6 right-6 flex flex-col gap-2 items-end z-20">
           {product.stockQuantity > 0 ? (
-            <span className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest ${product.stockQuantity < 10 ? 'bg-red-500 text-white animate-pulse' : 'bg-green-500/10 text-green-500 border border-green-500/20'}`}>
-              {product.stockQuantity} Left
-            </span>
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ 
+                opacity: 1, 
+                x: 0,
+                y: [0, -5, 0],
+                scale: [1, 1.02, 1]
+              }}
+              transition={{ 
+                y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className={`text-[12px] font-black px-4 py-2 rounded-xl uppercase tracking-widest shadow-2xl backdrop-blur-md border ${product.stockQuantity < 10 ? 'bg-red-500 text-white border-red-400 shadow-red-500/40' : 'bg-green-500 text-white border-green-400 shadow-green-500/40'}`}
+            >
+              {product.stockQuantity} LEFT
+            </motion.div>
           ) : (
-            <span className="text-[10px] bg-red-500 text-white px-3 py-1 rounded-full font-bold uppercase tracking-widest">
-              Sold Out
-            </span>
+            <div className="text-[12px] bg-red-600 text-white px-4 py-2 rounded-xl font-black uppercase tracking-widest shadow-xl border border-red-500">
+              SOLD OUT
+            </div>
           )}
         </div>
       </div>
