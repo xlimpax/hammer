@@ -95,7 +95,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
               alt={product.name} 
               fill 
               sizes="(max-width: 768px) 100vw, 50vw"
-              className={`object-cover transition-transform duration-200 ${showZoom ? 'scale-[2.5]' : 'scale-100'}`} 
+              className={`object-contain p-8 transition-transform duration-500 ${showZoom ? 'scale-[2.5]' : 'scale-100'}`} 
               style={showZoom ? { transformOrigin: `${zoomPos.x}% ${zoomPos.y}%` } : {}}
             />
           </div>
@@ -107,7 +107,7 @@ function ProductDetailsModal({ product, onClose, symbol, rate }: { product: any,
                 onClick={() => setSelectedImage(i)}
                 className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${selectedImage === i ? "border-[var(--color-brand-orange)] scale-105" : "border-white/5 opacity-50 hover:opacity-100"}`}
               >
-                <Image src={img} alt="Thumb" fill sizes="80px" className="object-cover" />
+                <Image src={img} alt="Thumb" fill sizes="80px" className="object-contain p-1" />
               </button>
             ))}
           </div>
@@ -321,7 +321,7 @@ function ProductCard({ product, index, symbol, rate, onSelect }: { product: any,
               alt={product.name} 
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className="object-cover"
+              className="object-contain p-6 transition-transform duration-500 group-hover:scale-110"
             />
           </motion.div>
         </AnimatePresence>
