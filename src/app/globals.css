@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-orange: #ff5722;
-  --color-brand-dark: #0a0a0a;
-  --color-brand-gray: #1a1a1a;
-  --color-brand-light: #f5f5f5;
-  --color-brand-white: #ffffff;
+  --color-brand-orange: #ff4500; /* Vibrant Orange-Red */
+  --color-brand-dark: #000000;   /* Pure Black */
+  --color-brand-gray: #080808;   /* Ultra Dark Gray */
+  --color-brand-light: #888888;  /* Medium Gray for text */
+  --color-brand-white: #ffffff;  /* Pure White for headings */
 }
 
 @layer utilities {
   .glass {
-    @apply bg-black/70 backdrop-blur-md border border-white/10;
+    @apply bg-black/60 backdrop-blur-xl border border-white/5;
   }
 }
 
