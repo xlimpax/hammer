@@ -76,6 +76,12 @@ export default function Navbar() {
     window.location.href = upiUrl;
   };
 
+  const handleWhatsAppShare = () => {
+    const cartSummary = items.map(item => `- ${item.name} (${item.quantity} units) @ ₹${item.price}`).join("\n");
+    const message = `📋 *HAMMER OFFICIAL INVOICE*\n\n*👤 CUSTOMER:* ${customerInfo.name}\n*📱 PHONE:* ${customerInfo.phone}\n\n*🛒 ORDER SUMMARY*\n${cartSummary}\n\n*🚚 SHIPPING:* ₹${shippingFee}\n*💰 TOTAL AMOUNT:* ₹${grandTotal}\n\n*🏦 BANK DETAILS:* \n- Account: HAMMER BAGS\n- No: 1234567890\n- IFSC: ICIC0001234\n\nThank you for shopping with HAMMER!`;
+    window.open(`https://wa.me/919903747606?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   return (
     <>
       <header
@@ -510,15 +516,26 @@ export default function Navbar() {
                       </div>
 
                       {/* Footer / Terms */}
-                      <div className="grid grid-cols-2 gap-10 mt-20 border-t pt-8">
-                        <div>
-                          <p className="text-[10px] font-black uppercase tracking-widest mb-3">Terms & Conditions</p>
-                          <ul className="text-[9px] text-gray-500 space-y-1 font-medium list-disc ml-3">
-                            <li>Goods once sold will not be taken back.</li>
-                            <li>Warranty as per manufacturer policies.</li>
-                            <li>All disputes are subject to Habra jurisdiction.</li>
-                            <li>This is a computer-generated invoice.</li>
-                          </ul>
+                      <div className="grid grid-cols-2 gap-10 mt-12 border-t pt-8">
+                        <div className="space-y-6">
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-widest mb-2">Bank Details</p>
+                            <div className="text-[9px] text-gray-500 font-bold space-y-0.5">
+                              <p>A/c Name: HAMMER BAGS</p>
+                              <p>Bank: ICICI BANK LTD</p>
+                              <p>A/c No: 1234567890</p>
+                              <p>IFSC: ICIC0001234</p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-widest mb-2">Terms & Conditions</p>
+                            <ul className="text-[9px] text-gray-500 space-y-1 font-medium list-disc ml-3">
+                              <li>Goods once sold will not be taken back.</li>
+                              <li>Warranty as per manufacturer policies.</li>
+                              <li>All disputes are subject to Habra jurisdiction.</li>
+                              <li>This is a computer-generated invoice.</li>
+                            </ul>
+                          </div>
                         </div>
                         <div className="text-right flex flex-col items-end justify-end">
                           <div className="w-32 h-12 border-b border-gray-300 mb-2"></div>
@@ -553,12 +570,18 @@ export default function Navbar() {
                       }
                     `}</style>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-3 gap-3">
                       <button 
                         onClick={handlePrint}
-                        className="bg-white text-black py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
+                        className="bg-white text-black py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-gray-100 transition-all flex items-center justify-center gap-2 border border-black/5"
                       >
-                         Generate Bill
+                         Print Bill
+                      </button>
+                      <button 
+                        onClick={handleWhatsAppShare}
+                        className="bg-[#25D366] text-white py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                      >
+                         WhatsApp
                       </button>
                       <button 
                         onClick={() => {
@@ -566,7 +589,7 @@ export default function Navbar() {
                           setIsCheckoutModalOpen(false);
                           setPaymentStep("form");
                         }}
-                        className="bg-[var(--color-brand-orange)] text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:opacity-90 transition-all"
+                        className="bg-[var(--color-brand-orange)] text-white py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:opacity-90 transition-all"
                       >
                          Done
                       </button>
