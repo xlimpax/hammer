@@ -421,49 +421,137 @@ export default function Navbar() {
                       <p className="text-gray-400 text-sm">Your payment has been received successfully.</p>
                     </div>
 
-                    <div id="invoice" className="bg-white text-black p-6 rounded-2xl shadow-2xl print:m-0 print:p-8 print:shadow-none">
-                      <div className="flex justify-between items-start mb-6 border-b pb-4">
+                    <div id="invoice" className="bg-white text-black p-10 rounded-2xl shadow-2xl print:m-0 print:p-0 print:shadow-none print:w-[210mm] print:h-[297mm] mx-auto overflow-hidden">
+                      {/* Invoice Header */}
+                      <div className="flex justify-between items-start mb-10 border-b-2 border-black pb-6">
                         <div>
-                          <h3 className="text-xl font-black tracking-tighter">HAMMER.</h3>
-                          <p className="text-[8px] font-bold text-gray-500 uppercase">Premium Bag Manufacturer</p>
+                          <h1 className="text-4xl font-[1000] tracking-tighter mb-1">HAMMER<span className="text-orange-600">.</span></h1>
+                          <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Premium Bag Manufacturer & Exporter</p>
+                          <div className="mt-4 text-[10px] leading-relaxed text-gray-600 font-medium">
+                            <p>Habra, North 24 Parganas</p>
+                            <p>West Bengal, India - 743271</p>
+                            <p>GSTIN: 19XXXXXXXXXXXXZ1</p>
+                            <p>Email: xlimpax@gmail.com | Mob: +91 9903747606</p>
+                          </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-[10px] font-bold text-gray-400">ORDER ID</p>
-                          <p className="text-xs font-black text-black">#HAM{Math.floor(Math.random()*100000)}</p>
-                        </div>
-                      </div>
-
-                      <div className="mb-6">
-                        <p className="text-[10px] font-bold text-gray-400 uppercase mb-2">Billed To</p>
-                        <p className="text-sm font-black">{customerInfo.name}</p>
-                        <p className="text-xs text-gray-600">{customerInfo.phone}</p>
-                        <p className="text-xs text-gray-600 leading-tight mt-1">{customerInfo.address}</p>
-                      </div>
-
-                      <div className="space-y-3 mb-6 border-y py-4">
-                        {items.map(item => (
-                          <div key={item.id} className="flex justify-between text-xs">
-                            <span className="text-gray-700">{item.name} x {item.quantity}</span>
-                            <span className="font-bold">₹{item.price * item.quantity}</span>
+                          <h2 className="text-3xl font-black text-gray-200 uppercase tracking-tighter mb-2">INVOICE</h2>
+                          <div className="space-y-1">
+                            <p className="text-[10px] font-bold text-gray-400 uppercase">Invoice No</p>
+                            <p className="text-sm font-black text-black">#HAM-{Math.floor(Math.random()*100000)}</p>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase mt-2">Date</p>
+                            <p className="text-sm font-black text-black">{new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
                           </div>
-                        ))}
+                        </div>
                       </div>
 
-                      <div className="space-y-1">
-                        <div className="flex justify-between text-xs">
-                          <span className="text-gray-500">Subtotal</span>
-                          <span className="font-bold">₹{totalPrice()}</span>
+                      {/* Billing Details */}
+                      <div className="grid grid-cols-2 gap-10 mb-10">
+                        <div>
+                          <p className="text-[10px] font-black text-orange-600 uppercase mb-3 tracking-widest border-b border-orange-100 pb-1">Billed To</p>
+                          <h3 className="text-lg font-black mb-1">{customerInfo.name}</h3>
+                          <p className="text-xs text-gray-600 font-bold mb-1">{customerInfo.phone}</p>
+                          <p className="text-xs text-gray-500 leading-relaxed max-w-[200px]">{customerInfo.address}</p>
                         </div>
-                        <div className="flex justify-between text-xs">
-                          <span className="text-gray-500">Shipping</span>
-                          <span className="font-bold">₹{shippingFee}</span>
+                        <div className="text-right">
+                          <p className="text-[10px] font-black text-orange-600 uppercase mb-3 tracking-widest border-b border-orange-100 pb-1 inline-block ml-auto">Payment Status</p>
+                          <div className="flex flex-col items-end gap-1">
+                            <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Paid Successfully</span>
+                            <p className="text-[10px] text-gray-400 mt-1">Via UPI/Card Transaction</p>
+                          </div>
                         </div>
-                        <div className="flex justify-between text-base pt-2 border-t mt-2">
-                          <span className="font-black uppercase tracking-tighter">Total Paid</span>
-                          <span className="font-black text-[var(--color-brand-orange)]">₹{grandTotal}</span>
+                      </div>
+
+                      {/* Items Table */}
+                      <div className="mb-10">
+                        <table className="w-full text-left">
+                          <thead>
+                            <tr className="bg-gray-50 border-y-2 border-black">
+                              <th className="py-3 px-4 text-[10px] font-black uppercase tracking-widest">Description</th>
+                              <th className="py-3 px-4 text-[10px] font-black uppercase tracking-widest text-center">Qty</th>
+                              <th className="py-3 px-4 text-[10px] font-black uppercase tracking-widest text-right">Price</th>
+                              <th className="py-3 px-4 text-[10px] font-black uppercase tracking-widest text-right">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-gray-100">
+                            {items.map(item => (
+                              <tr key={item.id} className="text-xs">
+                                <td className="py-4 px-4">
+                                  <p className="font-black text-black">{item.name}</p>
+                                  <p className="text-[9px] text-gray-400 uppercase font-bold">SKU: HM-{item.id.toString().slice(-4)}</p>
+                                </td>
+                                <td className="py-4 px-4 text-center font-bold">{item.quantity}</td>
+                                <td className="py-4 px-4 text-right font-medium">₹{item.price}</td>
+                                <td className="py-4 px-4 text-right font-black">₹{item.price * item.quantity}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Totals Section */}
+                      <div className="flex justify-end mb-10">
+                        <div className="w-64 space-y-3">
+                          <div className="flex justify-between text-xs">
+                            <span className="text-gray-500 font-bold uppercase tracking-widest">Subtotal</span>
+                            <span className="font-black text-gray-900">₹{totalPrice()}</span>
+                          </div>
+                          <div className="flex justify-between text-xs">
+                            <span className="text-gray-500 font-bold uppercase tracking-widest">Shipping & Handling</span>
+                            <span className="font-black text-gray-900">₹{shippingFee}</span>
+                          </div>
+                          <div className="h-px bg-gray-200 my-2" />
+                          <div className="flex justify-between items-center pt-2">
+                            <span className="text-sm font-black uppercase tracking-tighter">Grand Total</span>
+                            <span className="text-2xl font-[1000] text-orange-600">₹{grandTotal}</span>
+                          </div>
+                          <p className="text-[8px] text-gray-400 text-right font-bold italic mt-1">Amount inclusive of all taxes</p>
+                        </div>
+                      </div>
+
+                      {/* Footer / Terms */}
+                      <div className="grid grid-cols-2 gap-10 mt-20 border-t pt-8">
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-widest mb-3">Terms & Conditions</p>
+                          <ul className="text-[9px] text-gray-500 space-y-1 font-medium list-disc ml-3">
+                            <li>Goods once sold will not be taken back.</li>
+                            <li>Warranty as per manufacturer policies.</li>
+                            <li>All disputes are subject to Habra jurisdiction.</li>
+                            <li>This is a computer-generated invoice.</li>
+                          </ul>
+                        </div>
+                        <div className="text-right flex flex-col items-end justify-end">
+                          <div className="w-32 h-12 border-b border-gray-300 mb-2"></div>
+                          <p className="text-[10px] font-black uppercase tracking-widest">Authorized Signatory</p>
+                          <p className="text-[8px] text-gray-400 font-bold uppercase mt-1">For HAMMER Bags</p>
                         </div>
                       </div>
                     </div>
+
+                    <style jsx global>{`
+                      @media print {
+                        body * {
+                          visibility: hidden;
+                        }
+                        #invoice, #invoice * {
+                          visibility: visible;
+                        }
+                        #invoice {
+                          position: absolute;
+                          left: 0;
+                          top: 0;
+                          width: 100% !important;
+                          height: 100% !important;
+                          margin: 0 !important;
+                          padding: 40px !important;
+                          box-shadow: none !important;
+                          border-radius: 0 !important;
+                        }
+                        button, nav, header {
+                          display: none !important;
+                        }
+                      }
+                    `}</style>
 
                     <div className="grid grid-cols-2 gap-3">
                       <button 
