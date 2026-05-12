@@ -266,7 +266,7 @@ export default function Navbar() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-md glass rounded-[32px] p-8 border border-white/10"
+              className="relative w-full max-w-2xl glass rounded-[32px] p-8 border border-white/10 max-h-[95vh] overflow-y-auto custom-scrollbar"
             >
               <AnimatePresence mode="wait">
                 {paymentStep === "form" ? (
@@ -421,7 +421,7 @@ export default function Navbar() {
                       <p className="text-gray-400 text-sm">Your payment has been received successfully.</p>
                     </div>
 
-                    <div id="invoice" className="bg-white text-black p-10 rounded-2xl shadow-2xl print:m-0 print:p-0 print:shadow-none print:w-[210mm] print:h-[297mm] mx-auto overflow-hidden">
+                    <div id="invoice" className="bg-white text-black p-10 rounded-2xl shadow-2xl print:m-0 print:p-0 print:shadow-none print:w-[210mm] print:h-[297mm] mx-auto">
                       {/* Invoice Header */}
                       <div className="flex justify-between items-start mb-10 border-b-2 border-black pb-6">
                         <div>
