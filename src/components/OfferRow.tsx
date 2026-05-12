@@ -22,7 +22,7 @@ export default function OfferRow() {
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="bg-white text-[var(--color-brand-orange)] px-10 py-4 rounded-full font-black text-lg uppercase shadow-2xl cursor-pointer hover:bg-black hover:text-white transition-all"
-          onClick={() => window.location.href = "#shop"}
+          onClick={() => document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth' })}
         >
           Claim Offer Now
         </motion.div>

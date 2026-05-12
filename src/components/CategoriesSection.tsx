@@ -5,10 +5,10 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 const categories = [
-  { id: 1, name: "Travel Bags", image: "/images/travel.png", color: "from-orange-900/40" },
-  { id: 2, name: "Laptop Bags", image: "/images/laptop.png", color: "from-blue-900/40" },
-  { id: 3, name: "College Bags", image: "/images/backpack.png", color: "from-green-900/40" },
-  { id: 4, name: "Office Bags", image: "/images/laptop.png", color: "from-gray-700/40" },
+  { id: 1, name: "Travel Bags", image: "/hammer/images/travel.png", color: "from-orange-900/40" },
+  { id: 2, name: "Laptop Bags", image: "/hammer/images/laptop.png", color: "from-blue-900/40" },
+  { id: 3, name: "College Bags", image: "/hammer/images/backpack.png", color: "from-green-900/40" },
+  { id: 4, name: "Office Bags", image: "/hammer/images/laptop.png", color: "from-gray-700/40" },
 ];
 
 export default function CategoriesSection() {

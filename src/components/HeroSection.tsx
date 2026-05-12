@@ -66,10 +66,16 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start mt-6"
           >
-            <button className="w-full sm:w-auto bg-[var(--color-brand-orange)] text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-[#e64a19] transition-all shadow-[0_0_20px_rgba(255,87,34,0.3)] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)]">
+            <button 
+              onClick={() => document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto bg-[var(--color-brand-orange)] text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-[#e64a19] transition-all shadow-[0_0_20px_rgba(255,87,34,0.3)] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)]"
+            >
               Shop Now
             </button>
-            <button className="w-full sm:w-auto bg-transparent border border-white/20 text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-white/5 transition-all">
+            <button 
+              onClick={() => document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto bg-transparent border border-white/20 text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-white/5 transition-all"
+            >
               Explore Bags
             </button>
           </motion.div>
@@ -88,7 +94,7 @@ export default function HeroSection() {
             className="relative w-full max-w-lg aspect-square"
           >
             <Image 
-              src="/images/hero.png" 
+              src="/hammer/images/hero.png" 
               alt="Premium HAMMER Bag" 
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

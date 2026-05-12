@@ -24,6 +24,7 @@ interface ProductState {
   products: Product[];
   retailShippingCharge: number;
   upiId: string;
+  whatsappNumber: string;
   activePaymentModes: {
     whatsapp: boolean;
     upi: boolean;
@@ -34,7 +35,7 @@ interface ProductState {
   deleteProduct: (id: number) => void;
   deductStock: (id: number, quantity: number) => void;
   updateShippingCharge: (charge: number) => void;
-  updatePaymentSettings: (settings: Partial<ProductState['activePaymentModes']>, upiId?: string) => void;
+  updatePaymentSettings: (settings: Partial<ProductState['activePaymentModes']>, upiId?: string, whatsappNumber?: string) => void;
 }
 
 const INITIAL_PRODUCTS: Product[] = [
@@ -74,6 +75,7 @@ export const useProductStore = create<ProductState>()(
       products: INITIAL_PRODUCTS,
       retailShippingCharge: 49,
       upiId: "9903747606@ybl",
+      whatsappNumber: "919903747606",
       activePaymentModes: {
         whatsapp: true,
         upi: true,
@@ -102,9 +104,10 @@ export const useProductStore = create<ProductState>()(
 
       updateShippingCharge: (charge) => set({ retailShippingCharge: charge }),
 
-      updatePaymentSettings: (settings, upiId) => set((state) => ({
+      updatePaymentSettings: (settings, upiId, whatsappNumber) => set((state) => ({
         activePaymentModes: { ...state.activePaymentModes, ...settings },
-        ...(upiId ? { upiId } : {})
+        ...(upiId ? { upiId } : {}),
+        ...(whatsappNumber ? { whatsappNumber } : {})
       })),
     }),
     {

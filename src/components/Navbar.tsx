@@ -15,7 +15,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { items, totalPrice, clearCart, totalItems, removeItem, updateQuantity, isOpen, setIsOpen } = useCartStore();
-  const { deductStock, retailShippingCharge, upiId, activePaymentModes } = useProductStore();
+  const { products, deductStock, retailShippingCharge, upiId, whatsappNumber, activePaymentModes, updatePaymentSettings } = useProductStore();
 
   useEffect(() => {
     setMounted(true);
@@ -52,7 +52,7 @@ export default function Navbar() {
     if (checkoutType === "whatsapp") {
       const cartSummary = items.map(item => `- ${item.name} (${item.quantity} units) @ ₹${item.price}`).join("\n");
       const message = `🚀 *NEW ORDER FROM HAMMER*\n\n*👤 CUSTOMER DETAILS*\n- Name: ${customerInfo.name}\n- Phone: ${customerInfo.phone}\n- Address: ${customerInfo.address}\n\n*🛒 ORDER SUMMARY*\n${cartSummary}\n\n*🚚 SHIPPING:* ₹${shippingFee}\n*💰 TOTAL AMOUNT:* ₹${grandTotal}\n\nPlease confirm my order!`;
-      window.open(`https://wa.me/919903747606?text=${encodeURIComponent(message)}`, '_blank');
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
       clearCart();
       setIsCheckoutModalOpen(false);
     } else {
@@ -79,7 +79,7 @@ export default function Navbar() {
   const handleWhatsAppShare = () => {
     const cartSummary = items.map(item => `- ${item.name} (${item.quantity} units) @ ₹${item.price}`).join("\n");
     const message = `📋 *HAMMER OFFICIAL INVOICE*\n\n*👤 CUSTOMER:* ${customerInfo.name}\n*📱 PHONE:* ${customerInfo.phone}\n\n*🛒 ORDER SUMMARY*\n${cartSummary}\n\n*🚚 SHIPPING:* ₹${shippingFee}\n*💰 TOTAL AMOUNT:* ₹${grandTotal}\n\n*🏦 BANK DETAILS:* \n- Account: HAMMER BAGS\n- No: 1234567890\n- IFSC: ICIC0001234\n\nThank you for shopping with HAMMER!`;
-    window.open(`https://wa.me/919903747606?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (

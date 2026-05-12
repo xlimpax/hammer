@@ -44,6 +44,7 @@ export default function AdminDashboard() {
   const [localHeroBadge, setLocalHeroBadge] = useState("");
   const [localShippingCharge, setLocalShippingCharge] = useState(0);
   const [localUpiId, setLocalUpiId] = useState("");
+  const [localWhatsappNumber, setLocalWhatsappNumber] = useState("");
   const [localPaymentModes, setLocalPaymentModes] = useState({ whatsapp: true, upi: true, cards: true });
   const [localSocialLinks, setLocalSocialLinks] = useState({ facebook: "", instagram: "", twitter: "", youtube: "", whatsapp: "" });
   const [localReturnsPolicy, setLocalReturnsPolicy] = useState("");
@@ -59,6 +60,7 @@ export default function AdminDashboard() {
     setLocalHeroBadge(heroBadge);
     setLocalShippingCharge(retailShippingCharge);
     setLocalUpiId(upiId);
+    setLocalWhatsappNumber(whatsappNumber);
     setLocalPaymentModes(activePaymentModes);
     if (socialLinks) setLocalSocialLinks(socialLinks);
     if (returnsPolicy) setLocalReturnsPolicy(returnsPolicy);
@@ -77,7 +79,7 @@ export default function AdminDashboard() {
     updateTrending(localTrending);
     updateHeroBadge(localHeroBadge);
     updateShippingCharge(localShippingCharge);
-    updatePaymentSettings(localPaymentModes, localUpiId);
+    updatePaymentSettings(localPaymentModes, localUpiId, localWhatsappNumber);
     updateSocialLinks(localSocialLinks);
     updateReturnsPolicy(localReturnsPolicy);
     updateFaqs(localFaqs);
@@ -545,6 +547,17 @@ export default function AdminDashboard() {
                       onChange={(e) => setLocalUpiId(e.target.value)}
                       className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white font-bold"
                       placeholder="e.g. yourname@upi"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm font-medium text-gray-400">Business WhatsApp Number (with Country Code)</label>
+                    <input 
+                      type="text"
+                      value={localWhatsappNumber}
+                      onChange={(e) => setLocalWhatsappNumber(e.target.value)}
+                      className="w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] text-white font-bold"
+                      placeholder="e.g. 919903747606"
                     />
                   </div>
 

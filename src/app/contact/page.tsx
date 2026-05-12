@@ -1,9 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Send, Clock } from "lucide-react";
 
 export default function ContactPage() {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
   return (
     <div className="min-h-screen bg-[var(--color-brand-dark)] pt-32 pb-24">
       <div className="container mx-auto px-6 md:px-12">
@@ -99,51 +106,75 @@ export default function ContactPage() {
           >
             <h2 className="text-2xl font-bold mb-8 text-white">Send Us a Message</h2>
             
-            <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium text-gray-400">Your Name</label>
-                  <input 
-                    type="text" 
-                    placeholder="John Doe" 
-                    className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium text-gray-400">Email Address</label>
-                  <input 
-                    type="email" 
-                    placeholder="john@example.com" 
-                    className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-gray-400">Subject</label>
-                <input 
-                  type="text" 
-                  placeholder="How can we help?" 
-                  className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium text-gray-400">Message</label>
-                <textarea 
-                  rows={5}
-                  placeholder="Write your message here..." 
-                  className="bg-black/50 border border-white/10 rounded-3xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white resize-none"
-                ></textarea>
-              </div>
-
-              <button 
-                type="submit" 
-                className="bg-[var(--color-brand-orange)] hover:bg-orange-600 text-white font-bold rounded-2xl py-4 flex items-center justify-center gap-2 transition-all shadow-lg shadow-[var(--color-brand-orange)]/20 uppercase tracking-widest text-sm"
+            {formSubmitted ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex flex-col items-center justify-center py-20 text-center"
               >
-                Send Message <Send size={20} />
-              </button>
-            </form>
+                <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6">
+                  <Send size={40} />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                <p className="text-gray-400">Thank you for reaching out. Our team will get back to you shortly.</p>
+                <button 
+                  onClick={() => setFormSubmitted(false)}
+                  className="mt-8 text-[var(--color-brand-orange)] font-bold hover:underline"
+                >
+                  Send another message
+                </button>
+              </motion.div>
+            ) : (
+              <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm font-medium text-gray-400">Your Name</label>
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="John Doe" 
+                      className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-sm font-medium text-gray-400">Email Address</label>
+                    <input 
+                      required
+                      type="email" 
+                      placeholder="john@example.com" 
+                      className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-gray-400">Subject</label>
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="How can we help?" 
+                    className="bg-black/50 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-gray-400">Message</label>
+                  <textarea 
+                    required
+                    rows={5}
+                    placeholder="Write your message here..." 
+                    className="bg-black/50 border border-white/10 rounded-3xl px-5 py-4 focus:outline-none focus:border-[var(--color-brand-orange)] transition-colors text-white resize-none"
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="bg-[var(--color-brand-orange)] hover:bg-orange-600 text-white font-bold rounded-2xl py-4 flex items-center justify-center gap-2 transition-all shadow-lg shadow-[var(--color-brand-orange)]/20 uppercase tracking-widest text-sm"
+                >
+                  Send Message <Send size={20} />
+                </button>
+              </form>
+            )}
           </motion.div>
         </div>
 
