@@ -47,7 +47,7 @@ const INITIAL_PRODUCTS: Product[] = [
     originalPrice: 15999,
     category: "Travel Bags", 
     rating: 4.8, 
-    images: ["/images/travel.png"],
+    images: ["/hammer/images/travel.png"],
     inStock: true,
     stockQuantity: 45,
     allowCustomization: false
@@ -61,7 +61,7 @@ const INITIAL_PRODUCTS: Product[] = [
     originalPrice: 9999,
     category: "Laptop Bags", 
     rating: 4.9, 
-    images: ["/images/laptop.png"],
+    images: ["/hammer/images/laptop.png"],
     inStock: true,
     stockQuantity: 12,
     allowCustomization: false

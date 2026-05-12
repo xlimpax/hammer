@@ -32,7 +32,7 @@ export default function AdminDashboard() {
     allowCustomization: false,
     originalPrice: "",
     category: "", 
-    images: ["/images/hero.png"],
+    images: ["/hammer/images/hero.png"],
     inStock: true,
     stockQuantity: ""
   });
@@ -103,7 +103,7 @@ export default function AdminDashboard() {
       allowCustomization: false,
       originalPrice: "", 
       category: "", 
-      images: ["/images/hero.png"], 
+      images: ["/hammer/images/hero.png"], 
       inStock: true,
       stockQuantity: "0" 
     });
