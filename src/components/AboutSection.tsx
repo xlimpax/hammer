@@ -19,7 +19,7 @@ export default function AboutSection() {
           <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/20 z-10" />
           {/* Using hero image as brand placeholder */}
           <Image 
-            src="/hammer/images/travel.png" 
+            src="/images/travel.png" 
             alt="Hammer Brand" 
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"

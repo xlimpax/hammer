@@ -94,7 +94,7 @@ export default function HeroSection() {
             className="relative w-full max-w-lg aspect-square"
           >
             <Image 
-              src="/hammer/images/hero.png" 
+              src="/images/hero.png" 
               alt="Premium HAMMER Bag" 
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
