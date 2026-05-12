@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingCart, User, Menu, X, Search, Heart, Minus, Plus, ChevronRight } from "lucide-react";
+import { ShoppingCart, User, Menu, X, Search, Heart, Minus, Plus, ChevronRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
   const [checkoutType, setCheckoutType] = useState<"whatsapp" | "normal">("whatsapp");
-  const [paymentStep, setPaymentStep] = useState<"form" | "options">("form");
+  const [paymentStep, setPaymentStep] = useState<"form" | "options" | "success">("form");
   const [customerInfo, setCustomerInfo] = useState({ name: "", phone: "", address: "" });
 
   const hasRetailItems = items.some(item => item.id.includes("-retail"));
@@ -62,9 +62,13 @@ export default function Navbar() {
   };
 
   const handlePaymentComplete = () => {
-    alert(`🎉 Payment Successful!\nOrder ID: #HAM${Math.floor(Math.random()*10000)}\n\nThank you for shopping with HAMMER, ${customerInfo.name}!`);
-    clearCart();
-    setIsCheckoutModalOpen(false);
+    // Already deducted stock in handleFinalOrder for normal checkout if needed, 
+    // but usually we deduct when order is confirmed.
+    setPaymentStep("success");
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   const handleUpiDeepLink = () => {
@@ -333,7 +337,7 @@ export default function Navbar() {
                       </div>
                     </form>
                   </motion.div>
-                ) : (
+                ) : paymentStep === "options" ? (
                   <motion.div 
                     key="options"
                     initial={{ opacity: 0, x: 20 }}
@@ -368,7 +372,7 @@ export default function Navbar() {
                             </button>
                             <button 
                               onClick={handlePaymentComplete}
-                              className="w-full bg-white/10 text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/20 transition-all"
+                              className="w-full bg-black text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-gray-900 transition-all border border-white/10"
                             >
                               I Have Paid
                             </button>
@@ -401,6 +405,84 @@ export default function Navbar() {
                     >
                       Back to Details
                     </button>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col gap-6"
+                  >
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <CheckCircle2 size={32} />
+                      </div>
+                      <h2 className="text-2xl font-black text-white uppercase tracking-tighter">Order Confirmed!</h2>
+                      <p className="text-gray-400 text-sm">Your payment has been received successfully.</p>
+                    </div>
+
+                    <div id="invoice" className="bg-white text-black p-6 rounded-2xl shadow-2xl print:m-0 print:p-8 print:shadow-none">
+                      <div className="flex justify-between items-start mb-6 border-b pb-4">
+                        <div>
+                          <h3 className="text-xl font-black tracking-tighter">HAMMER.</h3>
+                          <p className="text-[8px] font-bold text-gray-500 uppercase">Premium Bag Manufacturer</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-[10px] font-bold text-gray-400">ORDER ID</p>
+                          <p className="text-xs font-black text-black">#HAM{Math.floor(Math.random()*100000)}</p>
+                        </div>
+                      </div>
+
+                      <div className="mb-6">
+                        <p className="text-[10px] font-bold text-gray-400 uppercase mb-2">Billed To</p>
+                        <p className="text-sm font-black">{customerInfo.name}</p>
+                        <p className="text-xs text-gray-600">{customerInfo.phone}</p>
+                        <p className="text-xs text-gray-600 leading-tight mt-1">{customerInfo.address}</p>
+                      </div>
+
+                      <div className="space-y-3 mb-6 border-y py-4">
+                        {items.map(item => (
+                          <div key={item.id} className="flex justify-between text-xs">
+                            <span className="text-gray-700">{item.name} x {item.quantity}</span>
+                            <span className="font-bold">₹{item.price * item.quantity}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs">
+                          <span className="text-gray-500">Subtotal</span>
+                          <span className="font-bold">₹{totalPrice()}</span>
+                        </div>
+                        <div className="flex justify-between text-xs">
+                          <span className="text-gray-500">Shipping</span>
+                          <span className="font-bold">₹{shippingFee}</span>
+                        </div>
+                        <div className="flex justify-between text-base pt-2 border-t mt-2">
+                          <span className="font-black uppercase tracking-tighter">Total Paid</span>
+                          <span className="font-black text-[var(--color-brand-orange)]">₹{grandTotal}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <button 
+                        onClick={handlePrint}
+                        className="bg-white text-black py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
+                      >
+                         Generate Bill
+                      </button>
+                      <button 
+                        onClick={() => {
+                          clearCart();
+                          setIsCheckoutModalOpen(false);
+                          setPaymentStep("form");
+                        }}
+                        className="bg-[var(--color-brand-orange)] text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:opacity-90 transition-all"
+                      >
+                         Done
+                      </button>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
